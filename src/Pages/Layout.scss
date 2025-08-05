@@ -1,0 +1,28 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100% !important;
+    width: 100%;
+}
+
+#root {
+    height: 100% !important;
+    width: 100%;
+}
+
+.layout {
+
+    .nav-header{
+        color: white;
+        height: 75px;
+        background-color: #00A8E8;
+        img{
+            height: 60px;
+        }
+        h1{
+            font-size: 30px;
+            font-weight: 200;
+        }
+    }
+}
