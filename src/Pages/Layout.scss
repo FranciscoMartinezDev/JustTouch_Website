@@ -25,4 +25,20 @@ body {
             font-weight: 200;
         }
     }
+    .body-content{
+        height: calc(100vh - 75px);
+    }
+}
+
+.page{
+    .page-header{
+        align-items: center;
+        padding: 20px;
+        border-bottom: 1px solid lightgray;
+        h1{
+            font-size: 35px;
+            font-weight: 200;
+        }
+    }
+    
 }

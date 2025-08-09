@@ -5,7 +5,6 @@ import { FaRegCircleUser } from "react-icons/fa6";
 import './Layout.scss';
 
 const AccountButton: FC = () => {
-
     return (
         <Menu.Root>
             <Menu.Trigger asChild>
@@ -33,7 +32,11 @@ const AccountButton: FC = () => {
     )
 }
 
-export default function Layout(): ReactElement {
+interface Props {
+    children: ReactElement
+}
+
+export const Layout: FC<Props> = ({ children }) => {
     return (
         <Box className='layout'>
             <Flex className='nav-header'
@@ -44,7 +47,9 @@ export default function Layout(): ReactElement {
                 <Heading as={'h1'}>Just Touch</Heading>
                 <AccountButton />
             </Flex>
-
+            <Box className='body-content'>
+                {children}
+            </Box>
         </Box>
     )
 }
