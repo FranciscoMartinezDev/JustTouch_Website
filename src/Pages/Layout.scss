@@ -4,6 +4,12 @@ body {
     padding: 0;
     height: 100% !important;
     width: 100%;
+
+    input,
+    select {
+        border-color: lightgray;
+        color: gray;
+    }
 }
 
 #root {
@@ -13,32 +19,36 @@ body {
 
 .layout {
 
-    .nav-header{
+    .nav-header {
         color: white;
         height: 75px;
         background-color: #00A8E8;
-        img{
+
+        img {
             height: 60px;
         }
-        h1{
+
+        h1 {
             font-size: 30px;
             font-weight: 200;
         }
     }
-    .body-content{
+
+    .body-content {
         height: calc(100vh - 75px);
     }
 }
 
-.page{
-    .page-header{
+.page {
+    .page-header {
         align-items: center;
         padding: 20px;
         border-bottom: 1px solid lightgray;
-        h1{
+
+        h1 {
             font-size: 35px;
             font-weight: 200;
         }
     }
-    
+
 }

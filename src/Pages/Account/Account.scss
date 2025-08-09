@@ -1,3 +1,57 @@
-.user-data{
-    
+.user-data {
+    display: grid;
+    grid-template-areas: "user nam last email phone"
+        "pass pass pass conf conf";
+    gap: 20px;
+    width: 100%;
+    padding: 20px;
+    border-bottom: 1px solid lightgray;
+
+    .user {
+        grid-area: user;
+    }
+
+    .name {
+        grid-area: nam;
+    }
+
+    .last {
+        grid-area: last;
+    }
+
+    .email {
+        grid-area: email;
+    }
+
+    .phone {
+        grid-area: phone;
+    }
+
+    .pass {
+        grid-area: pass;
+    }
+
+    .conf {
+        grid-area: conf;
+    }
+}
+
+.franchise-container {
+    padding: 20px;
+    width: 100%;
+
+    .franchise-item {
+        border-color: lightgray;
+
+    }
+
+    .franchise-data {
+        padding: 15px;
+        gap: 10px;
+    }
+    .branch-item{
+        padding: 15px;
+        gap: 15px;
+        align-items: center;
+    }
 }

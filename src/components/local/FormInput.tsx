@@ -4,7 +4,7 @@ import type { ChangeEventHandler, FC } from "react";
 
 interface Props {
     className?: string,
-    label: string,
+    label?: string,
     placeholder: string,
     helper?: string,
     password?: boolean,
@@ -16,10 +16,12 @@ interface Props {
 export const FormInput: FC<Props> = ({ className, label, placeholder, password = false, helper, error, value, change }) => {
     return (
         <Field.Root>
-            <Field.Label>
-                {label}
-                {error && <Field.RequiredIndicator />}
-            </Field.Label>
+            {label &&
+                <Field.Label>
+                    {label}
+                    {error && <Field.RequiredIndicator />}
+                </Field.Label>
+            }
             {!password ?
                 <Input borderColor={'lightgray'}
                     className={className}

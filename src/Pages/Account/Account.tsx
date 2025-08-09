@@ -4,6 +4,7 @@ import { Button, HStack, VStack } from "@chakra-ui/react";
 import { FaChevronLeft, FaRegFloppyDisk } from "react-icons/fa6";
 import { UserData } from "./Components/UserData";
 import './Account.scss';
+import { FranchiseData } from "./Components/FranchiseData";
 
 
 export const Account: FC = () => {
@@ -22,6 +23,7 @@ export const Account: FC = () => {
             Body={
                 <VStack>
                     <UserData />
+                    <FranchiseData />
                 </VStack>
             }
         />
