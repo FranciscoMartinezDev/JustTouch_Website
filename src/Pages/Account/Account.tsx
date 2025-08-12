@@ -21,7 +21,7 @@ export const Account: FC = () => {
                 </HStack>
             }
             Body={
-                <VStack>
+                <VStack spaceX={3}>
                     <UserData />
                     <FranchiseData />
                 </VStack>

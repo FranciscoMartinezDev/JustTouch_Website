@@ -1,0 +1,54 @@
+.service-request,
+.message-requested,
+.confirm-account {
+    background-color: #00A8E8 !important;
+    color: white;
+    height: 100vh !important;
+    padding-top: 50px;
+
+    img{
+        margin: auto;
+        margin-top: 50px;
+        width: 200px;
+    }
+    
+
+    span,
+    h1,
+    p {
+        text-align: center;
+        animation: onLoad linear;
+        animation-duration: .5s;
+    }
+
+    span {
+        width: 70vw;
+        margin: auto;
+        margin-block: 40px;
+    }
+}
+
+
+.service-request {
+    .request {
+        color: gray;
+        width: 400px;
+        height: 260px;
+        position: absolute;
+        inset: 0 0 150px 0;
+        margin: auto;
+    }
+}
+
+
+
+
+@keyframes onLoad {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

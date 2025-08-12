@@ -6,8 +6,9 @@ body {
     width: 100%;
 
     input,
-    select {
-        border-color: lightgray;
+    select,
+    textarea {
+        border-color: #c4c4c4;
         color: gray;
     }
 }

@@ -15,7 +15,7 @@ interface Props {
 
 export const FormInput: FC<Props> = ({ className, label, placeholder, password = false, helper, error, value, change }) => {
     return (
-        <Field.Root>
+        <Field.Root w={'auto'}>
             {label &&
                 <Field.Label>
                     {label}
