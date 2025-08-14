@@ -2,7 +2,7 @@ import type { FC } from "react";
 import { Page } from "@/Pages/Page";
 import { Box, Button, Flex, HStack } from "@chakra-ui/react";
 import { FaChevronLeft, FaRegFloppyDisk } from "react-icons/fa6";
-import { ProductItem } from "@/Pages/Menu/Components/Product";
+import { ProductItem } from "@/Pages/Menu/Components/ProductItem";
 import { FormInput } from "@/components/local/FormInput";
 import './Menu.scss';
 

@@ -1,6 +1,8 @@
 import type { FC } from "react";
 import { Page } from "@/Pages/Page";
 import { Button, Flex, HStack } from "@chakra-ui/react";
+import { CatalogItem } from "@/Pages/Menu/Components/CatalogItem";
+
 
 export const Menu: FC = () => {
     return (
@@ -10,8 +12,8 @@ export const Menu: FC = () => {
                 <Button>Menu</Button>
             </HStack>}
             Body={
-                <Flex>
-                    
+                <Flex className="catalog-container">
+                    <CatalogItem />
                 </Flex>
             } />
     )

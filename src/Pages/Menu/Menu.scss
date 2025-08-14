@@ -1,3 +1,42 @@
+.catalog-container {
+    padding: 20px;
+    gap: 20px;
+    flex-direction: column;
+
+    .catalog-card {
+        box-shadow: 0 0 5px 0 gray;
+
+        .catalog-header {
+            align-items: center;
+            padding: 10px 20px;
+
+            .catalog-actions {
+                margin-left: auto;
+            }
+        }
+
+        .catalog-body {
+            ul {
+                list-style: none;
+
+                li {
+                    display: flex;
+                    align-items: center;
+                    padding-bottom: 10px;
+                    border-bottom: 1px solid lightgray;
+                    color: gray;
+
+                    .product-actions{
+                        margin-left: auto;
+                        gap: 20px;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
 .catalog {
     border-bottom: 1px solid lightgray;
     gap: 20px;
