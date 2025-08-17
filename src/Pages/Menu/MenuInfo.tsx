@@ -7,6 +7,7 @@ import { FormInput } from "@/components/local/FormInput";
 import './Menu.scss';
 
 export const MenuInfo: FC = () => {
+    
     return (
         <Page Title="Cargar productos"
             Actions={<HStack>

@@ -70,6 +70,18 @@
     .product-item {
         padding: 10px;
         border-bottom: 1px solid #c4c4c4;
+
+        input {
+            max-width: 350px;
+        }
+
+        input+input {
+            max-width: 350px;
+        }
+
+        button {
+            margin-left: auto;
+        }
     }
 }
 
