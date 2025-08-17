@@ -3,16 +3,17 @@ import { NativeSelect } from "@chakra-ui/react";
 import { type ChangeEventHandler, type FC } from "react";
 
 interface Props {
+    className?: string,
     data?: Select[],
     placeholder?: string,
     value?: string | number | readonly string[] | undefined,
     change?: ChangeEventHandler<HTMLSelectElement>
 }
 
-export const SelectForm: FC<Props> = ({ data, placeholder, value, change }) => {
+export const SelectForm: FC<Props> = ({ className, data, placeholder, value, change }) => {
 
     return (
-        <NativeSelect.Root>
+        <NativeSelect.Root className={className}>
             <NativeSelect.Field placeholder={placeholder} value={value} onChange={change}>
                 {data != undefined ?
                     data.map((x, key) => {

@@ -20,7 +20,7 @@ export const MenuInfo: FC = () => {
             Body={
                 <Flex padding={'20px'} direction={'column'}>
                     <Flex className="catalog">
-                        <FormInput label="Catalogo" placeholder=". . ." />
+                        <FormInput className="catalog-title" label="Catalogo" placeholder=". . ." />
                         <Button colorPalette={'teal'}>Cargar productos</Button>
                     </Flex>
                     <Box  className="product-list">

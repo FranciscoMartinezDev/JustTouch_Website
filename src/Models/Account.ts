@@ -1,7 +1,12 @@
 import type { Franchise } from "./Franchise"
-import type { Users } from "./Users"
+import { Users } from "./Users"
 
-export type Account = {
-    UserData?: Users,
-    Franchises?: Franchise[]
+export class Account {
+    UserData?: Users;
+    Franchises: Franchise[];
+
+    constructor(user?: Users, franchises?: Franchise[]) {
+        this.UserData = user || new Users();
+        this.Franchises = franchises || [];
+    }
 }

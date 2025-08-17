@@ -15,7 +15,7 @@ interface Props {
 
 export const FormInput: FC<Props> = ({ className, label, placeholder, password = false, helper, error, value, change }) => {
     return (
-        <Field.Root w={'auto'}>
+        <Field.Root className={className}>
             {label &&
                 <Field.Label>
                     {label}
@@ -24,13 +24,11 @@ export const FormInput: FC<Props> = ({ className, label, placeholder, password =
             }
             {!password ?
                 <Input borderColor={'lightgray'}
-                    className={className}
                     placeholder={placeholder}
                     value={value}
                     onChange={change}
                 /> :
                 <PasswordInput borderColor={'lightgray'}
-                    className={className}
                     placeholder={placeholder}
                     value={value}
                     onChange={change} />

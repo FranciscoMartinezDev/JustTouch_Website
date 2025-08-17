@@ -1,6 +1,8 @@
 import type { Account } from "@/Models/Account"
 
 export type AccountType = {
-    account: Account | null,
-    handler: (callback: () => Account) => void
+    account: Account,
+    handler: (callback: (prev: Account) => Account) => void,
+    Initialize: () => void,
+    SaveChange: () => void,
 }

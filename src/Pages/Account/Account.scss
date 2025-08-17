@@ -18,14 +18,29 @@
     width: 100%;
     padding: 20px;
 
-    .franchise-item {
-        border-color: lightgray;
+    .angle {
+        transform: rotateZ(0);
+        transition: all .2s ease-in-out;
 
+        &.collapsed {
+            transform: rotateZ(180deg);
+            transition: all .2s ease-in-out;
+        }
+    }
+
+
+    .franchise-item {
+        border-color: #c4c4c4;
+
+        select,
+        input {
+            border-color: #c4c4c4;
+        }
     }
 
     .franchise-data {
-        padding: 15px;
         gap: 10px;
+        padding: 15px;
     }
 
     .branch-item {
@@ -38,7 +53,8 @@
 @media (max-width: 900px) {
     .user-data {
         grid-template-columns: 1fr;
-        .add {  
+
+        .add {
             position: relative;
             justify-content: center;
             width: 100%;

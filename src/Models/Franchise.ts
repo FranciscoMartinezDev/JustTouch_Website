@@ -1,9 +1,17 @@
 import type { Branches } from "@/Models/Branches";
 
-export type Franchise = {
-  FantasyName?: string | null;
-  CompanyName?: string | null;
-  TaxId?: string | null;
-  TaxCategory?: string | null;
+export class Franchise {
+  FantasyName?: string;
+  CompanyName?: string;
+  TaxId?: string;
+  TaxCategory?: string;
   Branches: Branches[];
+
+  constructor(FantasyName?: string, CompanyName?: string, TaxId?: string, TaxCategory?: string, Branches?: Branches[]) {
+    this.FantasyName = FantasyName;
+    this.CompanyName = CompanyName;
+    this.TaxId = TaxId;
+    this.TaxCategory = TaxCategory;
+    this.Branches = Branches || [];
+  }
 };

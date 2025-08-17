@@ -1,10 +1,13 @@
 import { RouterProvider } from 'react-router';
 import { routes } from '@/Routes';
+import { AccountProvider } from '@/Context/AccountContext';
 
 
 function App() {
   return (
-    <RouterProvider router={routes} />
+    <AccountProvider>
+      <RouterProvider router={routes} />
+    </AccountProvider>
   )
 }
 

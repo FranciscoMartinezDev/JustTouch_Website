@@ -1,13 +1,20 @@
-import type { FC } from "react";
+import { useEffect, type FC } from "react";
 import { Page } from "@/Pages/Page";
 import { Button, HStack, VStack } from "@chakra-ui/react";
 import { FaChevronLeft, FaRegFloppyDisk } from "react-icons/fa6";
 import { UserData } from "./Components/UserData";
 import './Account.scss';
 import { FranchiseData } from "./Components/FranchiseData";
+import { useAccountContext } from "@/Context/AccountContext";
 
 
 export const Account: FC = () => {
+    const {account, Initialize, SaveChange } = useAccountContext();
+
+    useEffect(() => {
+        Initialize()
+    }, [account])
+
     return (
         <Page Title="Cuenta"
             Actions={
@@ -15,7 +22,7 @@ export const Account: FC = () => {
                     <Button variant={'outline'} colorPalette={'blue'} borderWidth={2}>
                         <FaChevronLeft />Volver
                     </Button>
-                    <Button variant={'solid'}>
+                    <Button variant={'solid'} onClick={SaveChange}>
                         <FaRegFloppyDisk /> Guardar cambios
                     </Button>
                 </HStack>
