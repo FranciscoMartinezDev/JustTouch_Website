@@ -1,12 +1,14 @@
 import { RouterProvider } from 'react-router';
 import { routes } from '@/Routes';
 import { AccountProvider } from '@/Context/AccountContext';
-
+import { MenuProvider } from '@/Context/MenuContext';
 
 function App() {
   return (
     <AccountProvider>
-      <RouterProvider router={routes} />
+      <MenuProvider>
+        <RouterProvider router={routes} />
+      </MenuProvider>
     </AccountProvider>
   )
 }
