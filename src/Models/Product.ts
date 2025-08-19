@@ -2,7 +2,7 @@ export class Product {
   IdProduct?: number | null;
   Name?: string | undefined;
   Description?: string | undefined;
-  Price?: number;
+  Price?: string | undefined;
   IsAvailable!: boolean;
   IdMenu?: number | null;
   PictureUrl?: string;

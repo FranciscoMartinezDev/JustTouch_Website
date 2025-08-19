@@ -18,13 +18,23 @@ export default function useMenu() {
             return { ...prev, Products: productList }
         })
     }
+    
     const handleProductPrice = (value: string, index: number) => {
         handler((prev) => {
-            const productList = [...prev.Products];
-            productList[index].Price = parseFloat(value);
-            return { ...prev, Products: productList }
+            return {
+                ...prev, Products: prev.Products.map((prd, i) => {
+                    if (i === index) {
+                        const regex = /^\d*([.,]\d*)?$/;
+                        if (regex.test(value.toString())) {
+                            return { ...prd, Price: value };
+                        }
+                    }
+                    return prd;
+                })
+            }
         })
     }
+
     const handleProductDescription = (value: string, index: number) => {
         handler((prev) => {
             const productList = [...prev.Products];
@@ -78,7 +88,9 @@ export default function useMenu() {
     const RemoveProduct = (index: number) => {
         handler((prev) => {
             const productList = [...prev.Products];
-            productList.splice(index, 1);
+            if (productList.length > 1) {
+                productList.splice(index, 1);
+            }
             return { ...prev, Products: productList };
         })
     }

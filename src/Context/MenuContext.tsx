@@ -19,8 +19,12 @@ export const MenuProvider: FC<ContextChildren> = ({ children }) => {
         setMenu(callback);
     }
 
+    const SaveChange = () => {
+        console.log(menu);
+    }
+
     return (
-        <MenuContext.Provider value={{ menu, handler }}>
+        <MenuContext.Provider value={{ menu, handler, SaveChange }}>
             {children}
         </MenuContext.Provider>
     )

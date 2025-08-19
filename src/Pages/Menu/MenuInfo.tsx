@@ -10,7 +10,7 @@ import './Menu.scss';
 
 export const MenuInfo: FC = () => {
     const { handleCatalog, PushProduct } = useMenu();
-    const { menu } = useMenuContext();
+    const { menu, SaveChange } = useMenuContext();
 
     return (
         <Page Title="Cargar productos"
@@ -18,7 +18,7 @@ export const MenuInfo: FC = () => {
                 <Button variant={'outline'} colorPalette={'blue'} borderWidth={2}>
                     <FaChevronLeft />Volver
                 </Button>
-                <Button variant={'solid'}>
+                <Button variant={'solid'} onClick={SaveChange}>
                     <FaRegFloppyDisk /> Guardar cambios
                 </Button>
             </HStack>}
@@ -30,7 +30,7 @@ export const MenuInfo: FC = () => {
                             placeholder=". . ."
                             change={e => handleCatalog(e.target.value)}
                             value={menu.Catalog} />
-                        <Button colorPalette={'teal'}  onClick={PushProduct}>Cargar productos</Button>
+                        <Button colorPalette={'teal'} onClick={PushProduct}>Cargar productos</Button>
                     </Flex>
                     <Box className="product-list">
                         {menu.Products.map((item, index) => {
