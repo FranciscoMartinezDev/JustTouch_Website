@@ -1,10 +1,10 @@
 export class Product {
-  IdProduct?: number | null;
+  IdProduct?: number | 0;
   Name?: string | undefined;
   Description?: string | undefined;
   Price?: string | undefined;
-  IsAvailable!: boolean;
-  IdMenu?: number | null;
+  IsAvailable!: boolean | true;
+  IdMenu?: number | 0;
   PictureUrl?: string;
   Picture?: File;
 

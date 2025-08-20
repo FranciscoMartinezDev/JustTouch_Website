@@ -18,7 +18,7 @@ export default function useMenu() {
             return { ...prev, Products: productList }
         })
     }
-    
+
     const handleProductPrice = (value: string, index: number) => {
         handler((prev) => {
             return {

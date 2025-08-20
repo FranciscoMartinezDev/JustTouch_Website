@@ -4,6 +4,8 @@ import type { ContextChildren } from '@/Models/Contexts/ContextChildren';
 import { Account } from '@/Models/Account';
 import { Franchise } from '@/Models/Franchise';
 import { Branches } from '@/Models/Branches';
+import { AccountService } from '@/Services/AccountService';
+import { ValidateAccountForm } from '@/Helpers/ValidateForm';
 
 const AccountContext = createContext<AccountType | undefined>(undefined);
 
@@ -15,6 +17,7 @@ export const useAccountContext = (): AccountType => {
 
 export const AccountProvider: FC<ContextChildren> = ({ children }) => {
     const [account, setAccount] = useState<Account>(new Account());
+    const service: AccountService = AccountService.getInstance();
 
     const Initialize = () => {
         setAccount(prev => {
@@ -31,8 +34,17 @@ export const AccountProvider: FC<ContextChildren> = ({ children }) => {
         setAccount(prev => callback(prev));
     }
 
-    const SaveChange = () => {
-        console.log(account)
+    const SaveChange = async () => {
+        const validate = ValidateAccountForm(account);
+        if (validate) {
+            const result = await service.UpdateAccount(account);
+            if (result) {
+                //completar con otra logica
+                setTimeout(() => {
+                    window.location.href = ''
+                }, 2000);
+            }
+        }
     }
 
     return (

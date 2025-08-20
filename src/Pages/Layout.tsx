@@ -1,7 +1,7 @@
-import { Box, Button, Flex, Heading, Image, Menu, Portal, Separator, Text } from '@chakra-ui/react';
 import type { FC, ReactElement } from 'react';
+import { Box, Button, Flex, Heading, Image, Menu, Portal, Separator, Text } from '@chakra-ui/react';
+import { Toaster } from '@/components/ui/toaster';
 import { FaRegCircleUser } from "react-icons/fa6";
-
 import './Layout.scss';
 
 const AccountButton: FC = () => {
@@ -39,6 +39,7 @@ interface Props {
 export const Layout: FC<Props> = ({ children }) => {
     return (
         <Box className='layout'>
+            <Toaster />
             <Flex className='nav-header'
                 align={'center'}
                 paddingInline={3}
