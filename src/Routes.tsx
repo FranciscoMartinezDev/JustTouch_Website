@@ -14,7 +14,7 @@ export const routes = JustTouchBrowser([
         children: [
             {
                 path: '/',
-                element: <Layout><MenuInfo /></Layout>
+                element: <Layout><Account /></Layout>
             }
         ]
     }

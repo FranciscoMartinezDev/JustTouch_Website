@@ -16,7 +16,7 @@ export function ValidateMenuForm(menu: Menu): boolean {
     }))
 
     const validPictures: boolean = menu.Products.every(v => {
-        if(v.Picture !== null && v.Picture !== undefined){
+        if (v.Picture !== null && v.Picture !== undefined) {
             const regex = /^[^¿?:*"<>|]+$/;
             return regex.test(v.Picture?.name!);
         }
@@ -55,16 +55,16 @@ export function ValidateAccountForm(account: Account): boolean {
     const passWords: boolean = userData.Password === userData.Repeat;
 
     const validFranchises: boolean = franchises.every(x => {
-        Object.entries(x).every(([key, value]) => {
+        return Object.entries(x).every(([key, value]) => {
             if (key.includes('Branches')) return true;
             return value !== null && value !== undefined && value !== '';
         })
     });
     const withBranches: boolean = franchises.every(x => x.Branches.length > 0);
     const validBranches: boolean = franchises.every(x => {
-        x.Branches.every(x => {
-            Object.entries(x).every(([key, value]) => {
-                if (key.includes('OpenTime') && key.includes('CloseTime')) return true;
+        return x.Branches.every(x => {
+            return Object.entries(x).every(([key, value]) => {
+                if (key.includes('OpenTime') || key.includes('CloseTime') || key.includes('Email')) return true;
                 return value !== null && value !== undefined && value !== '';
             })
         })

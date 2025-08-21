@@ -35,6 +35,7 @@ export const AccountProvider: FC<ContextChildren> = ({ children }) => {
     }
 
     const SaveChange = async () => {
+        console.log(account);
         const validate = ValidateAccountForm(account);
         if (validate) {
             const result = await service.UpdateAccount(account);
