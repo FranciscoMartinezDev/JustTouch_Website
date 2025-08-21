@@ -19,6 +19,7 @@ export class MenuService {
             const url = `${MenuService.baseUrl}/AddCatalog`;
             const response = await axios.post(url, menu);
             if (response.status >= 200 && response.status <= 300) {
+                alert.Dispose();
                 alert.Success('¡Catalogo añadido exitosamente!')
                 return true;
             }

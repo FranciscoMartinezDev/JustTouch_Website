@@ -5,6 +5,9 @@ import { MenuService } from '@/Services/MenuService';
 import { createContext, useContext, useState, type FC } from 'react'
 import { MenuToFormData } from '@/Helpers/FormMapper';
 import { ValidateMenuForm } from '@/Helpers/ValidateForm';
+import { useParams } from 'react-router';
+import { Product } from '@/Models/Product';
+import { LocalToast } from '@/components/local/Toast';
 
 const MenuContext = createContext<MenuContextType | undefined>(undefined);
 
@@ -16,8 +19,18 @@ export const useMenuContext = (): MenuContextType => {
 }
 
 export const MenuProvider: FC<ContextChildren> = ({ children }) => {
-    const [menu, setMenu] = useState<Menu>(new Menu());
+    const [menu, setMenu] = useState<Menu>(new Menu({
+        IdBranch: 0, IdMenu: 0, Products:
+            [new Product({ IdProduct: 0, IdMenu: 0, IsAvailable: true })]
+    }));
     const service = MenuService.getInstance();
+    const toast = LocalToast.getInstance();
+    const { catalogKey } = useParams();
+
+    const Initialize = () => {
+        if (!catalogKey) {
+        }
+    }
 
     const handler = (callback: (prev: Menu) => Menu) => {
         setMenu(callback);
@@ -26,6 +39,7 @@ export const MenuProvider: FC<ContextChildren> = ({ children }) => {
     const SaveChange = async () => {
         var validate = ValidateMenuForm(menu);
         if (validate) {
+            toast.Loading('Añadiendo Catalogo...');
             const formMenu = MenuToFormData(menu);
             const result = await service.AddCatalog(formMenu);
             if (result) {
@@ -38,7 +52,7 @@ export const MenuProvider: FC<ContextChildren> = ({ children }) => {
     }
 
     return (
-        <MenuContext.Provider value={{ menu, handler, SaveChange }}>
+        <MenuContext.Provider value={{ menu, handler, SaveChange, Initialize }}>
             {children}
         </MenuContext.Provider>
     )

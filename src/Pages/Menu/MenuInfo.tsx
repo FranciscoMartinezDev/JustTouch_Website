@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import { useEffect, type FC } from "react";
 import { Page } from "@/Pages/Page";
 import { Box, Button, Flex, HStack } from "@chakra-ui/react";
 import { FaChevronLeft, FaRegFloppyDisk } from "react-icons/fa6";
@@ -10,8 +10,11 @@ import './Menu.scss';
 
 export const MenuInfo: FC = () => {
     const { handleCatalog, PushProduct } = useMenu();
-    const { menu, SaveChange } = useMenuContext();
+    const { menu, SaveChange, Initialize } = useMenuContext();
 
+    useEffect(() => {
+        Initialize();
+    }, [])
     return (
         <Page Title="Cargar productos"
             Actions={<HStack>

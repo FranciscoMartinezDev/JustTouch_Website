@@ -8,20 +8,33 @@ const alert = LocalToast.getInstance();
 
 export function ValidateMenuForm(menu: Menu): boolean {
     var isValid: boolean = true;
+    const validCatalog = menu.Catalog !== '' && menu.Catalog !== undefined
 
     const validProducts: boolean = menu.Products.every(v => Object.entries(v).every(([key, value]) => {
         if (key.includes('Picture') || key.includes('PictureUrl')) return true;
         return value !== null && value !== undefined && value !== '';
     }))
 
+    const validPictures: boolean = menu.Products.every(v => {
+        if(v.Picture !== null && v.Picture !== undefined){
+            const regex = /^[^¿?:*"<>|]+$/;
+            return regex.test(v.Picture?.name!);
+        }
+        return true;
+    })
+
     switch (isValid) {
-        case (menu.Catalog !== '' || menu.Catalog !== undefined): {
+        case (!validCatalog): {
             alert.Error('Debe completar con el nombre del catalogo');
             isValid = false;
             break;
         }
         case (!validProducts): {
             alert.Error('Debe completar todos los datos de cada producto');
+            isValid = false;
+            break;
+        } case (!validPictures): {
+            alert.Error('El nombre de la imagen no debe contener los siguientes caracteres: "¿ ? : * " < > |"');
             isValid = false;
             break;
         }
@@ -43,7 +56,7 @@ export function ValidateAccountForm(account: Account): boolean {
 
     const validFranchises: boolean = franchises.every(x => {
         Object.entries(x).every(([key, value]) => {
-            if(key.includes('Branches')) return true;
+            if (key.includes('Branches')) return true;
             return value !== null && value !== undefined && value !== '';
         })
     });

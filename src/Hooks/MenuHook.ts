@@ -81,7 +81,7 @@ export default function useMenu() {
 
     const PushProduct = () => {
         handler((prev) => {
-            return { ...prev, Products: [...prev.Products, new Product()] }
+            return { ...prev, Products: [...prev.Products, new Product({ IdProduct: 0, IdMenu: 0, IsAvailable: true })] }
         })
     }
 
