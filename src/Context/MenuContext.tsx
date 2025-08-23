@@ -36,6 +36,14 @@ export const MenuProvider: FC<ContextChildren> = ({ children }) => {
         setMenu(callback);
     }
 
+    const LeaveAccount =()=>{
+        var validate = ValidateMenuForm(menu);
+        if(validate){
+            window.location.href = '/';
+        }
+    }
+
+
     const SaveChange = async () => {
         var validate = ValidateMenuForm(menu);
         if (validate) {
@@ -52,7 +60,7 @@ export const MenuProvider: FC<ContextChildren> = ({ children }) => {
     }
 
     return (
-        <MenuContext.Provider value={{ menu, handler, SaveChange, Initialize }}>
+        <MenuContext.Provider value={{ menu, handler, SaveChange, LeaveAccount, Initialize }}>
             {children}
         </MenuContext.Provider>
     )

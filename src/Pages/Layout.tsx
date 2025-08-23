@@ -20,6 +20,9 @@ const AccountButton: FC = () => {
                         <Menu.Item value="" style={{ color: 'gray' }}>
                             Cuenta
                         </Menu.Item>
+                          <Menu.Item value="" style={{ color: 'gray' }}>
+                            Cambiar negocio
+                        </Menu.Item>
                         <Separator bg={'gray'} />
                         <Menu.Item value="" style={{ color: 'gray' }}>
                             Cerrar Session

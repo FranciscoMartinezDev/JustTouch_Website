@@ -6,8 +6,9 @@ export class Users {
     Password?: string;
     Repeat?: string;
     UserName?: string;
+    FirstLogin?: string;
 
-    constructor(firstName?: string, lastName?: string, phone?: string, email?: string, password?: string, repeat?: string, userName?: string) {
+    constructor(firstName?: string, lastName?: string, phone?: string, email?: string, password?: string, repeat?: string, userName?: string, firstLogin?: string) {
         this.FirstName = firstName;
         this.LastName = lastName;
         this.Phone = phone;
@@ -15,5 +16,6 @@ export class Users {
         this.Password = password;
         this.Repeat = repeat;
         this.UserName = userName;
+        this.FirstLogin = firstLogin;
     }
 };

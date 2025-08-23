@@ -12,7 +12,7 @@ export class MenuService {
         }
         return MenuService.instance;
     }
-
+    
     public async AddCatalog(menu: FormData): Promise<boolean> {
         const alert = MenuService.toast;
         try {
