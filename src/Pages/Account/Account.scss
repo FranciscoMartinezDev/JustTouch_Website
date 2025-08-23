@@ -1,3 +1,32 @@
+.sign-in {
+    background-color: #00A8E8;
+    height: 100vh;
+
+    input,
+    select {
+        border-color: #c4c4c4;
+        color: gray;
+    }
+
+    .sign-in-form {
+        color: gray;
+        width: 25vw;
+        margin: auto;
+        top: 150px;
+
+        img {
+            width: 20%;
+        }
+    }
+}
+
+.business-selector {
+    width: 25%;
+    margin: auto;
+    top: 150px;
+    color: gray;
+}
+
 .user-data {
     display: grid;
     grid-template-columns: repeat(5, minmax(150px, 1fr));

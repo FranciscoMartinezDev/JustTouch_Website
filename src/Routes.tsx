@@ -7,6 +7,7 @@ import { MenuInfo } from '@/Pages/Menu/MenuInfo';
 import { ServiceRequest } from '@/Pages/ServiceRequest/ServiceRequest';
 import { MessageRequested } from '@/Pages/ServiceRequest/MessageRequested';
 import { ConfirmAccount } from '@/Pages/ServiceRequest/ConfirmAccount';
+import { Signin } from './Pages/Account/SignIn';
 
 export const routes = JustTouchBrowser([
     {
@@ -14,7 +15,7 @@ export const routes = JustTouchBrowser([
         children: [
             {
                 path: '/',
-                element: <Layout><Account /></Layout>
+                element: <Signin />
             }
         ]
     }
