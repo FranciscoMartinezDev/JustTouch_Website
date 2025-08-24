@@ -23,10 +23,11 @@ export const MenuProvider: FC<ContextChildren> = ({ children }) => {
     const catalogCode = generateRandomString({ length: 10 });
     const productCode = generateRandomString({ length: 10 });
 
-    const [menu, setMenu] = useState<Menu>(new Menu({
-        IdBranch: 0, CatalogCode: catalogCode, Products:
-            [new Product({ ProductCode: productCode, IsAvailable: true })]
-    }));
+    const [menu, setMenu] = useState<Menu>(new Menu(
+        {
+            CatalogCode: catalogCode,
+            Products: [new Product({ ProductCode: productCode, IsAvailable: true })]
+        }));
     const service = MenuService.getInstance();
     const toast = LocalToast.getInstance();
     const { catalogKey } = useParams();

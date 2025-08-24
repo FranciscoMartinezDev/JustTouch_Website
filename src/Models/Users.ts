@@ -8,7 +8,7 @@ export class Users {
     UserName?: string;
     FirstLogin?: string;
 
-    constructor(init: Partial<Users>) {
+    constructor(init?: Partial<Users>) {
         Object.assign(this, init);
     }
 };
