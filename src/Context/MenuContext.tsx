@@ -8,6 +8,7 @@ import { ValidateMenuForm } from '@/Helpers/ValidateForm';
 import { useParams } from 'react-router';
 import { Product } from '@/Models/Product';
 import { LocalToast } from '@/components/local/Toast';
+import { generateRandomString } from 'ts-randomstring/lib';
 
 const MenuContext = createContext<MenuContextType | undefined>(undefined);
 
@@ -19,9 +20,12 @@ export const useMenuContext = (): MenuContextType => {
 }
 
 export const MenuProvider: FC<ContextChildren> = ({ children }) => {
+    const catalogCode = generateRandomString({ length: 10 });
+    const productCode = generateRandomString({ length: 10 });
+
     const [menu, setMenu] = useState<Menu>(new Menu({
-        IdBranch: 0, IdMenu: 0, Products:
-            [new Product({ IdProduct: 0, IdMenu: 0, IsAvailable: true })]
+        IdBranch: 0, CatalogCode: catalogCode, Products:
+            [new Product({ ProductCode: productCode, IsAvailable: true })]
     }));
     const service = MenuService.getInstance();
     const toast = LocalToast.getInstance();
@@ -36,13 +40,12 @@ export const MenuProvider: FC<ContextChildren> = ({ children }) => {
         setMenu(callback);
     }
 
-    const LeaveAccount =()=>{
+    const LeaveAccount = () => {
         var validate = ValidateMenuForm(menu);
-        if(validate){
+        if (validate) {
             window.location.href = '/';
         }
     }
-
 
     const SaveChange = async () => {
         var validate = ValidateMenuForm(menu);

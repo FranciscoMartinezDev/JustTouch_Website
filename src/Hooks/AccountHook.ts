@@ -1,6 +1,7 @@
 import { useAccountContext } from "@/Context/AccountContext"
 import { Branches } from "@/Models/Branches";
 import { Franchise } from "@/Models/Franchise";
+import { generateRandomString } from 'ts-randomstring/lib';
 
 export function useUserData() {
     const { handler } = useAccountContext();
@@ -64,10 +65,11 @@ export function useFranchises() {
     const { handler } = useAccountContext();
 
     const Push = () => {
+        const franchiseCode: string = generateRandomString({ length: 10 });
         handler(prev => {
             return {
                 ...prev,
-                Franchises: [...prev?.Franchises, new Franchise()]
+                Franchises: [...prev?.Franchises, new Franchise({ FranchiseCode: franchiseCode })]
             };
         });
     };
@@ -75,14 +77,8 @@ export function useFranchises() {
     const Remove = (index: number) => {
         handler(prev => {
             const franchises = [...prev.Franchises];
-            if (franchises.length > 1) {
-                franchises.splice(index, 1);
-                return {
-                    ...prev,
-                    Franchises: franchises
-                };
-            }
-            return prev;
+            franchises[index].Deleted = true;
+            return { ...prev, Franchises: franchises }
         });
     }
 
@@ -231,9 +227,10 @@ export function useBranches() {
     }
 
     const Push = (FKey: number) => {
+        const branchCode: string = generateRandomString({ length: 10 });
         handler((prev) => {
             const franchises = [...prev.Franchises];
-            franchises[FKey].Branches.push(new Branches());
+            franchises[FKey].Branches.push(new Branches({ BranchCode: branchCode }));
             return { ...prev, Franchises: franchises }
         })
     }
@@ -241,7 +238,7 @@ export function useBranches() {
     const Remove = (FKey: number, BKey: number) => {
         handler((prev) => {
             const franchises = [...prev.Franchises];
-            if (franchises[FKey].Branches.length > 1) franchises[FKey].Branches.splice(BKey, 1);
+            franchises[FKey].Branches[BKey].Deleted = true;
             return { ...prev, Franchises: franchises }
         })
     }

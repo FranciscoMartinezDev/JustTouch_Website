@@ -6,6 +6,7 @@ import { Franchise } from '@/Models/Franchise';
 import { Branches } from '@/Models/Branches';
 import { AccountService } from '@/Services/AccountService';
 import { ValidateAccountForm } from '@/Helpers/ValidateForm';
+import { generateRandomString } from "ts-randomstring/lib"
 
 const AccountContext = createContext<AccountType | undefined>(undefined);
 
@@ -22,8 +23,11 @@ export const AccountProvider: FC<ContextChildren> = ({ children }) => {
     const Initialize = () => {
         setAccount(prev => {
             if (prev.Franchises.length === 0) {
-                const newFranchise = new Franchise();
-                newFranchise.Branches.push(new Branches())
+                const franchiseCode = generateRandomString({ length: 10 });
+                const branchCode = generateRandomString({ length: 10 });
+
+                const newFranchise = new Franchise({ FranchiseCode: franchiseCode });
+                newFranchise.Branches.push(new Branches({ BranchCode: branchCode }));
                 return { ...prev, Franchises: [...prev.Franchises, newFranchise] }
             }
             return prev;
@@ -35,7 +39,6 @@ export const AccountProvider: FC<ContextChildren> = ({ children }) => {
     }
 
     const SaveChange = async () => {
-        console.log(account);
         const validate = ValidateAccountForm(account);
         if (validate) {
             const result = await service.UpdateAccount(account);

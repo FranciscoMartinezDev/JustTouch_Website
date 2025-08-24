@@ -1,6 +1,7 @@
 import { useMenuContext } from "@/Context/MenuContext";
 import { Product } from "@/Models/Product";
 import type { ChangeEvent } from "react";
+import { generateRandomString } from 'ts-randomstring/lib';
 
 export default function useMenu() {
     const { handler } = useMenuContext();
@@ -80,17 +81,16 @@ export default function useMenu() {
     }
 
     const PushProduct = () => {
+        const productCode: string = generateRandomString({ length: 10 });
         handler((prev) => {
-            return { ...prev, Products: [...prev.Products, new Product({ IdProduct: 0, IdMenu: 0, IsAvailable: true })] }
+            return { ...prev, Products: [...prev.Products, new Product({ ProductCode: productCode, IdMenu: 0, IsAvailable: true })] }
         })
     }
 
     const RemoveProduct = (index: number) => {
         handler((prev) => {
             const productList = [...prev.Products];
-            if (productList.length > 1) {
-                productList.splice(index, 1);
-            }
+            productList[index].Deleted = true;
             return { ...prev, Products: productList };
         })
     }

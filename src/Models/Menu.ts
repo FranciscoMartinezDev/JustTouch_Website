@@ -1,7 +1,7 @@
 import { Product } from "./Product";
 
 export class Menu {
-    IdMenu?: number;
+    CatalogCode?: string;
     Catalog?: string;
     IdBranch!: number;
     Products: Product[] = [new Product];

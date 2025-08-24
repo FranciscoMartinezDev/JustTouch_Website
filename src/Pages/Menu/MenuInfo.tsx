@@ -15,6 +15,7 @@ export const MenuInfo: FC = () => {
     useEffect(() => {
         Initialize();
     }, [])
+    
     return (
         <Page Title="Cargar productos"
             Actions={<HStack>
@@ -36,7 +37,7 @@ export const MenuInfo: FC = () => {
                         <Button colorPalette={'teal'} onClick={PushProduct}>Cargar productos</Button>
                     </Flex>
                     <Box className="product-list">
-                        {menu.Products.map((item, index) => {
+                        {menu.Products.filter(x => x.IdProduct !== undefined).map((item, index) => {
                             return <ProductItem Product={item} PKey={index} key={index} />
                         })}
                     </Box>
