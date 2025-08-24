@@ -1,6 +1,7 @@
 import type { Branches } from "@/Models/Branches";
 
 export class Franchise {
+  IdFranchise?: number;
   FranchiseCode?: string;
   FantasyName?: string;
   CompanyName?: string;

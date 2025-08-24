@@ -26,8 +26,8 @@ export const AccountProvider: FC<ContextChildren> = ({ children }) => {
                 const franchiseCode = generateRandomString({ length: 10 });
                 const branchCode = generateRandomString({ length: 10 });
 
-                const newFranchise = new Franchise({ FranchiseCode: franchiseCode });
-                newFranchise.Branches.push(new Branches({ BranchCode: branchCode }));
+                const newFranchise = new Franchise({ IdFranchise: 0, FranchiseCode: franchiseCode });
+                newFranchise.Branches.push(new Branches({ IdBranch: 0, BranchCode: branchCode }));
                 return { ...prev, Franchises: [...prev.Franchises, newFranchise] }
             }
             return prev;

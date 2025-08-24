@@ -1,4 +1,5 @@
 export class Branches {
+  IdBranch?: number;
   BranchCode?: string;
   Country?: string;
   ProvinceOrState?: string;

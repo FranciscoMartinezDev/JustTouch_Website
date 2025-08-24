@@ -26,7 +26,7 @@ export const MenuProvider: FC<ContextChildren> = ({ children }) => {
     const [menu, setMenu] = useState<Menu>(new Menu(
         {
             CatalogCode: catalogCode,
-            Products: [new Product({ ProductCode: productCode, IsAvailable: true })]
+            Products: [new Product({ IdProduct: 0, ProductCode: productCode, IsAvailable: true })]
         }));
     const service = MenuService.getInstance();
     const toast = LocalToast.getInstance();
