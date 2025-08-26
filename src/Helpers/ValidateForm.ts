@@ -96,3 +96,16 @@ export function ValidateAccountForm(account: Account): boolean {
 
     return isValid;
 }
+
+export function ValidateServiceRequest(user: Users): boolean {
+    var isValid:boolean = true;
+    const emailValid:boolean = user.Email !== undefined && user.Email !== '' && user.Email != null;
+    const userNameValid:boolean = user.UserName !== undefined && user.UserName !== '' && user.UserName !== null;
+
+    if(!emailValid && !userNameValid){
+        isValid =  false;
+        alert.Error('Debe completar todos los datos para poder avanzar');
+    }
+
+    return isValid;
+}
