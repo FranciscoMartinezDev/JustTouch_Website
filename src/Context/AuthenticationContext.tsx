@@ -49,8 +49,7 @@ export const AuthenticationProvider: FC<ContextChildren> = ({ children }) => {
         if (result != undefined) {
             const auth: Authentication = result.Authentication!;
             const account: Account = result.Account!;
-
-            Set(auth?.access_token, 'JT_Token', auth?.expires_in);
+            Set<string>(auth?.access_token!, 'JT_Token', auth?.expires_in);
             store.Set('token', auth.access_token);
 
             if (account.Franchises == undefined) {
