@@ -5,4 +5,5 @@ export type ServiceRequestType = {
     handleEmail: (value: string) => void,
     HandleUserName: (value: string) => void,
     newAccount: () => void,
+    confirmEmail: (email: string) => void,
 }

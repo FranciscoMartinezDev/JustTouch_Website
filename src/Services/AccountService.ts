@@ -3,7 +3,8 @@ import type { Account } from "@/Models/Account";
 import type { Authentication } from "@/Models/Authentication";
 import type { Users } from "@/Models/Users";
 import axios from "axios";
-import type { Session } from "react-router";
+import { Session } from '@/Models/Session';
+
 const alert = LocalToast.getInstance();
 
 export class AccountService {

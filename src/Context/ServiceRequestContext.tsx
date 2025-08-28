@@ -1,8 +1,11 @@
 import { ValidateServiceRequest } from '@/Helpers/ValidateForm';
+import { useCookie } from '@/Hooks/CookieHook';
+import type { Authentication } from '@/Models/Authentication';
 import type { ContextChildren } from '@/Models/Contexts/ContextChildren';
 import type { ServiceRequestType } from '@/Models/Contexts/ServiceRequestType';
 import { Users } from '@/Models/Users';
 import { AccountService } from '@/Services/AccountService';
+import { Storage } from '@/Store/Storage';
 import { createContext, useContext, useState, type FC } from 'react';
 
 
@@ -19,6 +22,8 @@ export const useServiceRequestContext = (): ServiceRequestType => {
 export const ServiceRequestProvider: FC<ContextChildren> = ({ children }) => {
     const [user, setUser] = useState<Users>(new Users());
     const accountService = AccountService.getInstance();
+    const store = Storage.getInstance();
+    const { Set } = useCookie();
 
     const handleEmail = (value: string) => {
         setUser(prev => {
@@ -43,9 +48,20 @@ export const ServiceRequestProvider: FC<ContextChildren> = ({ children }) => {
             }
         }
     }
+
+    const confirmEmail = async (email: string) => {
+        const result: Authentication | undefined = await accountService.ConfirmEmail(email);
+        if (result != undefined) {
+            const auth: Authentication = result;
+            Set(auth.access_token, 'JT_Token', auth.expires_in);
+            store.Set<string>('token', auth.access_token!);
+            window.location.href = '';
+        }
+    }
+
     
     return (
-        <ServiceRequestContext.Provider value={{ user, handleEmail, HandleUserName, newAccount }}>
+        <ServiceRequestContext.Provider value={{ user, handleEmail, HandleUserName, newAccount, confirmEmail }}>
             {children}
         </ServiceRequestContext.Provider>
     )

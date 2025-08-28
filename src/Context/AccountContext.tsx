@@ -7,6 +7,7 @@ import { Branches } from '@/Models/Branches';
 import { AccountService } from '@/Services/AccountService';
 import { ValidateAccountForm } from '@/Helpers/ValidateForm';
 import { generateRandomString } from "ts-randomstring/lib"
+import { Storage } from '@/Store/Storage';
 
 const AccountContext = createContext<AccountType | undefined>(undefined);
 
@@ -19,6 +20,7 @@ export const useAccountContext = (): AccountType => {
 export const AccountProvider: FC<ContextChildren> = ({ children }) => {
     const [account, setAccount] = useState<Account>(new Account());
     const service: AccountService = AccountService.getInstance();
+    const store = Storage.getInstance();
 
     const Initialize = () => {
         setAccount(prev => {
@@ -43,13 +45,18 @@ export const AccountProvider: FC<ContextChildren> = ({ children }) => {
         if (validate) {
             const result = await service.UpdateAccount(account);
             if (result) {
-                //completar con otra logica
-                setTimeout(() => {
-                    window.location.href = ''
-                }, 2000);
+                const franchises: Franchise[] = account.Franchises;
+                const franch = franchises.map(({ IdFranchise, ...franchise }) => {
+                    const branches = franchise.Branches.map(({ IdBranch, ...branch }) => branch);
+                    franchise.Branches = branches;
+                    return franchise;
+                })
+                store.Set('branch_code', franch[0].Branches[0].BranchCode);
             }
         }
     }
+
+    
 
     return (
         <AccountContext.Provider value={{ account, handler, Initialize, SaveChange }}>
