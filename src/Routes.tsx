@@ -7,15 +7,44 @@ import { MenuInfo } from '@/Pages/Menu/MenuInfo';
 import { ServiceRequest } from '@/Pages/ServiceRequest/ServiceRequest';
 import { MessageRequested } from '@/Pages/ServiceRequest/MessageRequested';
 import { ConfirmAccount } from '@/Pages/ServiceRequest/ConfirmAccount';
-import { Signin } from './Pages/Account/SignIn';
+import { Signin } from '@/Pages/Account/SignIn';
+
 
 export const routes = JustTouchBrowser([
+    {
+        path: 'sign-in',
+        element: <Signin />
+    },
+    {
+        path: '/welcome',
+        element: <ConfirmAccount />
+    },
+    {
+        path: '/conformation-email',
+        element: <MessageRequested />
+    },
+    {
+        path: '/service-request',
+        element: <ServiceRequest />
+    },
     {
         element: <Gatekeeper />,
         children: [
             {
-                path: '/',
-                element: <Signin />
+                path: '/profile/account',
+                element: <Layout><Account /></Layout>
+            },
+            {
+                path: '/profile/menu',
+                element: <Layout><Menu /></Layout>
+            },
+            {
+                path: '/profile/new-product-group',
+                element: <Layout><MenuInfo /></Layout>
+            },
+            {
+                path: '/profile/edit-product-group/:catalogKey',
+                element: <Layout><MenuInfo /></Layout>
             }
         ]
     }

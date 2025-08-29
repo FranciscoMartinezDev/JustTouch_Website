@@ -40,26 +40,37 @@ export const AccountProvider: FC<ContextChildren> = ({ children }) => {
         setAccount(prev => callback(prev));
     }
 
+    const LeaveAccount = () => {
+        var validate = ValidateAccountForm(account);
+        if (validate) {
+            window.location.href = '/profile/menu';
+        }
+    }
+
     const SaveChange = async () => {
         const validate = ValidateAccountForm(account);
         if (validate) {
             const result = await service.UpdateAccount(account);
+            const branch = store.Get('branch_code');
             if (result) {
-                const franchises: Franchise[] = account.Franchises;
-                const franch = franchises.map(({ IdFranchise, ...franchise }) => {
-                    const branches = franchise.Branches.map(({ IdBranch, ...branch }) => branch);
-                    franchise.Branches = branches;
-                    return franchise;
-                })
-                store.Set('branch_code', franch[0].Branches[0].BranchCode);
+                if (!branch) {
+                    const franchises: Franchise[] = account.Franchises;
+                    const franch = franchises.map(({ IdFranchise, ...franchise }) => {
+                        const branches = franchise.Branches.map(({ IdBranch, ...branch }) => branch);
+                        franchise.Branches = branches;
+                        return franchise;
+                    })
+                    store.Set('branch_code', franch[0].Branches[0].BranchCode);
+                    return;
+                }
             }
         }
     }
 
-    
+
 
     return (
-        <AccountContext.Provider value={{ account, handler, Initialize, SaveChange }}>
+        <AccountContext.Provider value={{ account, handler, Initialize, SaveChange, LeaveAccount }}>
             {children}
         </AccountContext.Provider>
     )

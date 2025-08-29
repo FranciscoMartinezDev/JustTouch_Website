@@ -7,15 +7,16 @@ import { FormInput } from "@/components/local/FormInput";
 import useMenu from "@/Hooks/MenuHook";
 import { useMenuContext } from "@/Context/MenuContext";
 import './Menu.scss';
+import { useParams } from "react-router";
 
 export const MenuInfo: FC = () => {
     const { handleCatalog, PushProduct } = useMenu();
     const { menu, SaveChange, Initialize } = useMenuContext();
-
+    const { catalogKey } = useParams();
     useEffect(() => {
-        Initialize();
+        Initialize(catalogKey);
     }, [])
-    
+
     return (
         <Page Title="Cargar productos"
             Actions={<HStack>

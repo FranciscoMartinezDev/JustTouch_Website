@@ -3,6 +3,7 @@ import type { FC } from "react";
 import './ServiceRequest.scss';
 
 export const ConfirmAccount: FC = () => {
+    
     return (
         <Box className="confirm-account">
             <Heading as={"h1"} size={'6xl'}>¡Bienvenid@ a la familia!</Heading>

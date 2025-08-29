@@ -5,14 +5,23 @@ import { Outlet, Navigate } from 'react-router';
 
 export const Gatekeeper: FC = () => {
     const store = Storage.getInstance();
-    const { Get } = useCookie();
-    
+    const { Get, Remove } = useCookie();
     const branch = store.Get<string>('branch_code');
+
     const token = Get<string>('JT_Token')
     const storageToken = store.Get('token');
 
-    if (true) {
-        return <Outlet />
+    if (!token || !branch) {
+        Remove('JT_Token');
+        store.Dispose();
+        return <Navigate to={'/sign-in'} />
     }
-    return <Navigate to={'/'} />
+
+    if (storageToken !== token) {
+        Remove('JT_Token');
+        store.Dispose();
+        return <Navigate to={'/sign-in'} />
+    }
+
+    return <Outlet />
 }

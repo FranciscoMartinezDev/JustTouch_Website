@@ -4,7 +4,6 @@ import type { Authentication } from "@/Models/Authentication";
 import type { Users } from "@/Models/Users";
 import axios from "axios";
 import { Session } from '@/Models/Session';
-
 const alert = LocalToast.getInstance();
 
 export class AccountService {
@@ -18,9 +17,9 @@ export class AccountService {
         return AccountService.instance;
     }
 
-    public async GetData(email: string): Promise<Account | undefined> {
+    public async GetData(): Promise<Account | undefined> {
         try {
-            const url = `${AccountService.baseUrl}/${email}`;
+            const url = `${AccountService.baseUrl}/Profile`;
             const response = await axios.get(url);
             if (response.status >= 200 && response.status < 300) {
                 return response.data as Account;

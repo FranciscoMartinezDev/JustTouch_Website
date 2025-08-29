@@ -5,13 +5,11 @@ import { MenuService } from '@/Services/MenuService';
 import { createContext, useContext, useState, type FC } from 'react'
 import { MenuToFormData } from '@/Helpers/FormMapper';
 import { ValidateMenuForm } from '@/Helpers/ValidateForm';
-import { useParams } from 'react-router';
 import { Product } from '@/Models/Product';
 import { LocalToast } from '@/components/local/Toast';
 import { generateRandomString } from 'ts-randomstring/lib';
 
 const MenuContext = createContext<MenuContextType | undefined>(undefined);
-
 
 export const useMenuContext = (): MenuContextType => {
     const context = useContext(MenuContext);
@@ -30,10 +28,13 @@ export const MenuProvider: FC<ContextChildren> = ({ children }) => {
         }));
     const service = MenuService.getInstance();
     const toast = LocalToast.getInstance();
-    const { catalogKey } = useParams();
 
-    const Initialize = () => {
-        if (!catalogKey) {
+    const Initialize = async (catalogKey: string | undefined) => {
+        if (catalogKey !== undefined) {
+            var catalog = await service.GetCatalog(catalogKey);
+            if (catalog != undefined) {
+                setMenu(catalog);
+            }
         }
     }
 
@@ -41,12 +42,6 @@ export const MenuProvider: FC<ContextChildren> = ({ children }) => {
         setMenu(callback);
     }
 
-    const LeaveAccount = () => {
-        var validate = ValidateMenuForm(menu);
-        if (validate) {
-            window.location.href = '/';
-        }
-    }
 
     const SaveChange = async () => {
         var validate = ValidateMenuForm(menu);
@@ -64,7 +59,7 @@ export const MenuProvider: FC<ContextChildren> = ({ children }) => {
     }
 
     return (
-        <MenuContext.Provider value={{ menu, handler, SaveChange, LeaveAccount, Initialize }}>
+        <MenuContext.Provider value={{ menu, handler, SaveChange, Initialize }}>
             {children}
         </MenuContext.Provider>
     )

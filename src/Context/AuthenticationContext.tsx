@@ -45,7 +45,6 @@ export const AuthenticationProvider: FC<ContextChildren> = ({ children }) => {
 
     const SignIn = async () => {
         const result: Session | undefined = await accountService.Signin(user);
-
         if (result != undefined) {
             const auth: Authentication = result.Authentication!;
             const account: Account = result.Account!;
@@ -59,10 +58,10 @@ export const AuthenticationProvider: FC<ContextChildren> = ({ children }) => {
             setBusiness(account.Franchises);
         }
     }
-
+    
     const SelectBusiness = (branchCode: string) => {
         store.Set('branch_code', branchCode);
-        window.location.href = '';
+        window.location.href = '/profile/menu';
     }
 
 

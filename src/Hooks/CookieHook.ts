@@ -13,8 +13,13 @@ export function useCookie() {
         return data as T;
     }
 
+    const Remove = (key: string) => {
+        Cookies.remove(key);
+    }
+
     return {
         Set,
-        Get
+        Get,
+        Remove
     }
 }

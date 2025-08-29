@@ -9,7 +9,7 @@ import { useAccountContext } from "@/Context/AccountContext";
 
 
 export const Account: FC = () => {
-    const {account, Initialize, SaveChange } = useAccountContext();
+    const { account, Initialize, SaveChange, LeaveAccount } = useAccountContext();
 
     useEffect(() => {
         Initialize()
@@ -19,7 +19,8 @@ export const Account: FC = () => {
         <Page Title="Cuenta"
             Actions={
                 <HStack>
-                    <Button variant={'outline'} colorPalette={'blue'} borderWidth={2}>
+                    <Button variant={'outline'} colorPalette={'blue'} borderWidth={2}
+                        onClick={LeaveAccount}>
                         <FaChevronLeft />Volver
                     </Button>
                     <Button variant={'solid'} onClick={SaveChange}>

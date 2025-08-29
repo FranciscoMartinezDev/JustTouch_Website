@@ -5,4 +5,5 @@ export type AccountType = {
     handler: (callback: (prev: Account) => Account) => void,
     Initialize: () => void,
     SaveChange: () => void,
+    LeaveAccount: () => void,
 }
