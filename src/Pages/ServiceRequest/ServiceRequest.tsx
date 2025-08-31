@@ -1,11 +1,13 @@
 import { FormInput } from "@/components/local/FormInput";
-import { Box, Button, Card } from "@chakra-ui/react";
+import { Box, Button, Card, Text } from "@chakra-ui/react";
 import type { FC } from "react";
-import './ServiceRequest.scss';
 import { useServiceRequestContext } from "@/Context/ServiceRequestContext";
+import { FaRegCircleCheck } from "react-icons/fa6";
+import './ServiceRequest.scss';
+import { ClipLoader } from 'react-spinners';
 
 export const ServiceRequest: FC = () => {
-    const { user, handleEmail, HandleUserName, newAccount } = useServiceRequestContext();
+    const { user, requesting, requested, handleEmail, HandleUserName, newAccount } = useServiceRequestContext();
 
     return (
         <Box className="service-request">
@@ -20,7 +22,14 @@ export const ServiceRequest: FC = () => {
                         placeholder="Escriba un nombre para su usuario..."
                         change={e => HandleUserName(e.target.value)}
                         value={user.UserName} />
-                    <Button onClick={newAccount}>Solicitar</Button>
+                    <Button colorPalette={requested ? 'green' : ''}
+                        loading={requesting}
+                        spinner={<ClipLoader size={25} color="white" />}
+                        onClick={newAccount}>
+                        {!requested ? <Text>Solicitar</Text> :
+                            <Text display={'flex'} gap={5} justifyContent={'start'}><FaRegCircleCheck />¡Esta hecho!</Text>
+                        }
+                    </Button>
                 </Card.Body>
             </Card.Root>
         </Box>

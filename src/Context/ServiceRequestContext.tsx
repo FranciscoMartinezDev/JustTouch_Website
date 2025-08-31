@@ -23,6 +23,13 @@ export const ServiceRequestProvider: FC<ContextChildren> = ({ children }) => {
     const [user, setUser] = useState<Users>(new Users());
     const accountService = AccountService.getInstance();
     const store = Storage.getInstance();
+
+    const [confirming, setConfirming] = useState<boolean>(false);
+    const [confirmed, setConfirmed] = useState<boolean>(false);
+
+
+    const [requesting, setRequesting] = useState<boolean>(false);
+    const [requested, setRequested] = useState<boolean>(false);
     const { Set } = useCookie();
 
     const handleEmail = (value: string) => {
@@ -40,28 +47,36 @@ export const ServiceRequestProvider: FC<ContextChildren> = ({ children }) => {
     const newAccount = async () => {
         const validate = ValidateServiceRequest(user);
         if (validate) {
+            setRequesting(true);
             const result = await accountService.AddAccount(user);
             if (result) {
+                setRequesting(false);
+                setRequested(true);
                 setTimeout(() => {
-                    window.location.href = '';
+                    window.location.href = '/confirmation-email';
                 }, 2000);
             }
         }
     }
 
-    const confirmEmail = async (email: string) => {
-        const result: Authentication | undefined = await accountService.ConfirmEmail(email);
+    const confirmEmail = async (email: string | undefined) => {
+        setConfirming(true);
+        const result: Authentication | undefined = await accountService.ConfirmEmail(email!);
         if (result != undefined) {
             const auth: Authentication = result;
             Set(auth.access_token, 'JT_Token', auth.expires_in);
             store.Set<string>('token', auth.access_token!);
-            window.location.href = '';
+            setConfirming(false);
+
+            setConfirmed(true);
+            setTimeout(() => {
+                window.location.href = '/profile/account';
+            }, 2000);
         }
     }
 
-    
     return (
-        <ServiceRequestContext.Provider value={{ user, handleEmail, HandleUserName, newAccount, confirmEmail }}>
+        <ServiceRequestContext.Provider value={{ user, requesting, requested, confirming, confirmed, handleEmail, HandleUserName, newAccount, confirmEmail }}>
             {children}
         </ServiceRequestContext.Provider>
     )

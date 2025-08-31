@@ -1,9 +1,15 @@
 import { Box, Flex, Heading, Separator, Text, Image, Button } from "@chakra-ui/react";
 import type { FC } from "react";
 import './ServiceRequest.scss';
+import { useServiceRequestContext } from "@/Context/ServiceRequestContext";
+import { useParams } from "react-router";
+import { ClipLoader } from 'react-spinners';
+import { FaRegCircleCheck } from "react-icons/fa6";
 
 export const ConfirmAccount: FC = () => {
-    
+    const { email } = useParams();
+    const { confirmed, confirming, confirmEmail } = useServiceRequestContext();
+
     return (
         <Box className="confirm-account">
             <Heading as={"h1"} size={'6xl'}>¡Bienvenid@ a la familia!</Heading>
@@ -15,7 +21,16 @@ export const ConfirmAccount: FC = () => {
             </Flex>
             <Image src="https://dvvlhkouasxqzmaxkvll.supabase.co/storage/v1/object/public/footages/JustTouchLogo.png" />
             <Flex justify={'center'} marginTop={10}>
-                <Button colorPalette={'blue'} marginTop={5}>Acceder</Button>
+                <Button w={200}
+                    colorPalette={!confirmed ? 'cyan' : 'green'}
+                    marginTop={5}
+                    loading={confirming}
+                    spinner={<ClipLoader size={25} color="white" />}
+                    onClick={() => confirmEmail(email)}>
+                    {confirmed ?
+                        <Text display={'flex'} gap={5} justifyContent={'start'}><FaRegCircleCheck />¡Listo!</Text>
+                        : <Text>Acceder</Text>}
+                </Button>
             </Flex>
         </Box>
     )

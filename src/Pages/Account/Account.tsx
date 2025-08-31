@@ -3,17 +3,17 @@ import { Page } from "@/Pages/Page";
 import { Button, HStack, VStack } from "@chakra-ui/react";
 import { FaChevronLeft, FaRegFloppyDisk } from "react-icons/fa6";
 import { UserData } from "./Components/UserData";
-import './Account.scss';
 import { FranchiseData } from "./Components/FranchiseData";
 import { useAccountContext } from "@/Context/AccountContext";
+import './Account.scss';
 
 
 export const Account: FC = () => {
     const { account, Initialize, SaveChange, LeaveAccount } = useAccountContext();
 
-    useEffect(() => {
-        Initialize()
-    }, [account])
+    // useEffect(() => {
+    //     Initialize()
+    // }, [])
 
     return (
         <Page Title="Cuenta"

@@ -3,16 +3,19 @@ import { routes } from '@/Routes';
 import { AccountProvider } from '@/Context/AccountContext';
 import { MenuProvider } from '@/Context/MenuContext';
 import { ServiceRequestProvider } from '@/Context/ServiceRequestContext';
+import { AuthenticationProvider } from '@/Context/AuthenticationContext';
 
 function App() {
   return (
-    <ServiceRequestProvider>
-      <AccountProvider>
-        <MenuProvider>
-          <RouterProvider router={routes} />
-        </MenuProvider>
-      </AccountProvider>
-    </ServiceRequestProvider>
+    <AuthenticationProvider>
+      <ServiceRequestProvider>
+        <AccountProvider>
+          <MenuProvider>
+              <RouterProvider router={routes} />
+          </MenuProvider>
+        </AccountProvider>
+      </ServiceRequestProvider>
+    </AuthenticationProvider>
   )
 }
 

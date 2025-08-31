@@ -23,6 +23,7 @@ export const AccountProvider: FC<ContextChildren> = ({ children }) => {
     const store = Storage.getInstance();
 
     const Initialize = () => {
+
         setAccount(prev => {
             if (prev.Franchises.length === 0) {
                 const franchiseCode = generateRandomString({ length: 10 });

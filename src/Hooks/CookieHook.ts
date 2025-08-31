@@ -5,7 +5,7 @@ export function useCookie() {
 
     const Set = <T>(value: T, key: string, expires: number | Date | undefined) => {
         const stringify = JSON.stringify(value);
-        Cookies.set(stringify, key, { expires: expires })
+        Cookies.set(key, stringify,{ expires: expires })
     }
 
     const Get = <T>(key: string): T => {

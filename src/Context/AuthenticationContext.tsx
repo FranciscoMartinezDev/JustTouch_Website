@@ -64,9 +64,8 @@ export const AuthenticationProvider: FC<ContextChildren> = ({ children }) => {
         window.location.href = '/profile/menu';
     }
 
-
     return (
-        <AuthenticationContext.Provider value={{ Business, handleEmail, handlePassword, SignIn, SelectBusiness }}>
+        <AuthenticationContext.Provider value={{ user, Business, handleEmail, handlePassword, SignIn, SelectBusiness }}>
             {children}
         </AuthenticationContext.Provider>
     )
