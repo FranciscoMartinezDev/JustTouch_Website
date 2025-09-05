@@ -10,7 +10,8 @@ export function useCookie() {
 
     const Get = <T>(key: string): T => {
         const data = Cookies.get(key);
-        return data as T;
+        var result = JSON.parse(data!);
+        return result as T;
     }
 
     const Remove = (key: string) => {

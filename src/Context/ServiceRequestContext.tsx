@@ -1,13 +1,14 @@
 import { ValidateServiceRequest } from '@/Helpers/ValidateForm';
-import { useCookie } from '@/Hooks/CookieHook';
 import type { Authentication } from '@/Models/Authentication';
 import type { ContextChildren } from '@/Models/Contexts/ContextChildren';
 import type { ServiceRequestType } from '@/Models/Contexts/ServiceRequestType';
+import type { Franchise } from '@/Models/Franchise';
+import type { Session } from '@/Models/Session';
 import { Users } from '@/Models/Users';
 import { AccountService } from '@/Services/AccountService';
 import { Storage } from '@/Store/Storage';
 import { createContext, useContext, useState, type FC } from 'react';
-
+import Cookie from 'js-cookie';
 
 const ServiceRequestContext = createContext<ServiceRequestType | undefined>(undefined);
 
@@ -30,7 +31,6 @@ export const ServiceRequestProvider: FC<ContextChildren> = ({ children }) => {
 
     const [requesting, setRequesting] = useState<boolean>(false);
     const [requested, setRequested] = useState<boolean>(false);
-    const { Set } = useCookie();
 
     const handleEmail = (value: string) => {
         setUser(prev => {
@@ -61,16 +61,19 @@ export const ServiceRequestProvider: FC<ContextChildren> = ({ children }) => {
 
     const confirmEmail = async (email: string | undefined) => {
         setConfirming(true);
-        const result: Authentication | undefined = await accountService.ConfirmEmail(email!);
+        const result: Session | undefined = await accountService.ConfirmEmail(email!);
         if (result != undefined) {
-            const auth: Authentication = result;
-            Set(auth.access_token, 'JT_Token', auth.expires_in);
+            //authentication 
+            const auth: Authentication = result.Authentication!;
+            Cookie.set('JT_Token', auth.access_token!, { expires: auth.expires_in });
             store.Set<string>('token', auth.access_token!);
-            setConfirming(false);
 
+            store.Set<Franchise[]>('Franchises', result.Account?.Franchises || []);
+            setConfirming(false);
             setConfirmed(true);
+
             setTimeout(() => {
-                window.location.href = '/profile/account';
+                window.location.href = '/';
             }, 2000);
         }
     }

@@ -1,10 +1,4 @@
-class user_data {
-  email?: string;
-
-  constructor(init: Partial<user_data>) {
-    Object.assign(this, init);
-  }
-}
+import type { user_data } from "./user_data";
 
 export class Authentication {
   access_token?: string;

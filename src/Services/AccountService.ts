@@ -1,9 +1,9 @@
 import { LocalToast } from "@/components/local/Toast";
 import type { Account } from "@/Models/Account";
-import type { Authentication } from "@/Models/Authentication";
 import type { Users } from "@/Models/Users";
 import axios from "axios";
 import { Session } from '@/Models/Session';
+import Cookie from 'js-cookie';
 const alert = LocalToast.getInstance();
 
 export class AccountService {
@@ -19,8 +19,17 @@ export class AccountService {
 
     public async GetData(): Promise<Account | undefined> {
         try {
+
+            const raw = Cookie.get('JT_Token');
+            const token = raw?.replace(/^"|"$/g, "") ?? "";
             const url = `${AccountService.baseUrl}/Profile`;
-            const response = await axios.get(url);
+            const response = await axios.get(url, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+                withCredentials: true
+            });
+
             if (response.status >= 200 && response.status < 300) {
                 return response.data as Account;
             }
@@ -75,12 +84,12 @@ export class AccountService {
         }
     }
 
-    public async ConfirmEmail(email: string): Promise<Authentication | undefined> {
+    public async ConfirmEmail(email: string): Promise<Session | undefined> {
         try {
             const url = `${AccountService.baseUrl}/ConfirmEmail/${email}`;
             const response = await axios.get(url);
             if (response.status >= 200 && response.status < 300) {
-                return response.data as Authentication;
+                return response.data as Session;
             }
             const errorOptions: ErrorOptions = {
                 cause: response.status

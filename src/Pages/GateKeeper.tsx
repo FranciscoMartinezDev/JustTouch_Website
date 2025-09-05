@@ -1,35 +1,41 @@
-import { useAuthenticationContext } from "@/Context/AuthenticationContext";
-import { useCookie } from "@/Hooks/CookieHook";
+import { Franchise } from "@/Models/Franchise";
 import { Storage } from "@/Store/Storage";
-import type { FC } from "react";
-import { Outlet, Navigate } from 'react-router';
+import { type FC } from "react";
+import { Navigate, Outlet } from 'react-router';
+import Cookie from 'js-cookie';
+import { useAuthenticationContext } from "@/Context/AuthenticationContext";
 
 export const Gatekeeper: FC = () => {
+    const { hasToken, twinToken } = useAuthenticationContext();
     const store = Storage.getInstance();
-    const { Get, Remove } = useCookie();
-    const { Business } = useAuthenticationContext();
     const branch = store.Get<string>('branch_code');
-    const token = Get<string>('JT_Token')
-    const storageToken = store.Get('token');
-    
+
+    const franchises: Franchise[] = store.Get('Franchises') || [];
+
+    const token = hasToken();
+    const twin = twinToken();
+
+
     if (!token) {
-        Remove('JT_Token');
         store.Dispose();
-        return <Navigate to={'/sign-in'} />
-    }
+        Cookie.remove('JT_Token');
 
-    if (!branch && Business.length === 0) {
-        return <Navigate to={'/profile/account'} />
-    }
-
-    if(!branch && Business.length > 0){
-        return <Navigate to={'/sign-in'} />
-    }
-
-    if (storageToken !== token) {
-        Remove('JT_Token');
+        if (location.pathname !== '/sign-in') {
+            return <Navigate to={'/sign-in'} />;
+        }
+    } else if (token && !twinToken) {
         store.Dispose();
-        return <Navigate to={'/sign-in'} />
+        Cookie.remove('JT_Token');
+
+        if (location.pathname !== '/sign-in') {
+            return <Navigate to={'/sign-in'} />;
+        }
+    } else if (token && twin) {
+        if (!branch && franchises.length > 0) {
+            if (location.pathname !== '/sign-in') {
+                return <Navigate to={'/sign-in'} />;
+            }
+        }
     }
 
     return <Outlet />

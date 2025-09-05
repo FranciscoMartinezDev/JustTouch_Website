@@ -69,7 +69,7 @@ export function useFranchises() {
         handler(prev => {
             return {
                 ...prev,
-                Franchises: [...prev?.Franchises, new Franchise({ FranchiseCode: franchiseCode })]
+                Franchises: [...prev?.Franchises, new Franchise({ Deleted: false, FranchiseCode: franchiseCode })]
             };
         });
     };
@@ -77,7 +77,7 @@ export function useFranchises() {
     const Remove = (index: number) => {
         handler(prev => {
             const franchises = [...prev.Franchises];
-            franchises[index].Deleted = true;
+            if (franchises.length === 1) franchises[index].Deleted = true;
             return { ...prev, Franchises: franchises }
         });
     }
