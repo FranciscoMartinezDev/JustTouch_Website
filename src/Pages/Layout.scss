@@ -96,5 +96,54 @@ body {
             border-radius: 5px;
         }
     }
+}
 
+.loader-container {
+    position: absolute;
+    width: 100vw;
+    height: 100vw;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, .6);
+
+    .loader {
+        width: 100px;
+        height: 70px;
+        margin: auto;
+        margin-top: 50px;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+
+        span {
+            background-color: #00A8E8;
+            width: calc(100% / 3);
+            height: 100%;
+            animation: loading infinite 1s ease-in-out;
+        }
+
+        span+span {
+            animation-delay: .10s;
+        }
+
+        span+span+span {
+            animation-delay: .20s;
+        }
+    }
+
+    @keyframes loading {
+        0% {
+            transform: scaleY(0);
+            transform-origin: bottom;
+        }
+
+        50% {
+            transform: scaleY(1);
+            transform-origin: bottom;
+        }
+
+        100% {
+            transform: scaleY(0);
+            transform-origin: bottom;
+        }
+    }
 }

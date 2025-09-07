@@ -3,6 +3,8 @@ import { Box, Button, Flex, Heading, Image, Menu, Portal, Separator, Text } from
 import { Toaster } from '@/components/ui/toaster';
 import { FaRegCircleUser } from "react-icons/fa6";
 import './Layout.scss';
+import { useAccountContext } from '@/Context/AccountContext';
+import { Loader } from '@/components/local/Loader';
 
 const AccountButton: FC = () => {
     return (
@@ -20,7 +22,7 @@ const AccountButton: FC = () => {
                         <Menu.Item value="" style={{ color: 'gray' }}>
                             Cuenta
                         </Menu.Item>
-                          <Menu.Item value="" style={{ color: 'gray' }}>
+                        <Menu.Item value="" style={{ color: 'gray' }}>
                             Cambiar negocio
                         </Menu.Item>
                         <Separator bg={'gray'} />
@@ -40,20 +42,24 @@ interface Props {
 }
 
 export const Layout: FC<Props> = ({ children }) => {
+    const { loadingAccount } = useAccountContext();
     return (
-        <Box className='layout'>
-            <Toaster />
-            <Flex className='nav-header'
-                align={'center'}
-                paddingInline={3}
-                gap={3}>
-                <Image src='https://dvvlhkouasxqzmaxkvll.supabase.co/storage/v1/object/public/footages/JustTouchLogo.png' />
-                <Heading as={'h1'}>Just Touch</Heading>
-                <AccountButton />
-            </Flex>
-            <Box className='body-content'>
-                {children}
+        <>
+            {loadingAccount ? <Loader /> : null}
+            <Box className='layout'>
+                <Toaster />
+                <Flex className='nav-header'
+                    align={'center'}
+                    paddingInline={3}
+                    gap={3}>
+                    <Image src='https://dvvlhkouasxqzmaxkvll.supabase.co/storage/v1/object/public/footages/JustTouchLogo.png' />
+                    <Heading as={'h1'}>Just Touch</Heading>
+                    <AccountButton />
+                </Flex>
+                <Box className='body-content'>
+                    {children}
+                </Box>
             </Box>
-        </Box>
+        </>
     )
 }

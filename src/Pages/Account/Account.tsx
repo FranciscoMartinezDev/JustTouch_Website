@@ -9,7 +9,7 @@ import './Account.scss';
 
 
 export const Account: FC = () => {
-    const { Initialize, SaveChange, LeaveAccount } = useAccountContext();
+    const { account, Initialize, SaveChange, LeaveAccount } = useAccountContext();
 
     useEffect(() => {
         Initialize()

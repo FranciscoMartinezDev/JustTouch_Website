@@ -13,10 +13,12 @@ export const Signin: FC = () => {
     const store = Storage.getInstance();
     const branch = store.Get<string>('branch_code');
     const franchises: Franchise[] = store.Get('Franchises') || [];
+    // const session = store.Get('SessionExpired');
     
     const token = hasToken();
     const twin = twinToken();
-
+    
+    
     if (token && twin && !branch && franchises.length === 0) {
         return <Navigate to={'/profile/account'} />
     } else {

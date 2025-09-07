@@ -21,14 +21,14 @@ export const FranchiseItem: FC<Props> = ({ Franchise, FKey }) => {
     const { account } = useAccountContext();
     const { handleCompanyName, handleFantasyName, handleTaxCategory, handleTaxId, Remove } = useFranchises();
     const { Push } = useBranches();
-    const [collapsed, setCollapsed] = useState<boolean>(() => { return account.Franchises.length === 1 });
+    const [collapsed, setCollapsed] = useState<boolean>(() => { return account!.Franchises.length === 1 });
 
     const taxCategories: Select[] = Object.entries(TaxCategory).map(([sig, desc]): Select => {
         return { value: sig, text: desc }
     })
 
     const collapse = () => {
-        if (!collapsed && account.Franchises[FKey].Branches.length > 0) {
+        if (!collapsed && account!.Franchises[FKey].Branches.length > 0) {
             setCollapsed(true);
         } else {
             setCollapsed(false);

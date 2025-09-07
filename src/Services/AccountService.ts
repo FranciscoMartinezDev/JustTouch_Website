@@ -3,11 +3,12 @@ import type { Account } from "@/Models/Account";
 import type { Users } from "@/Models/Users";
 import axios from "axios";
 import { Session } from '@/Models/Session';
-import Cookie from 'js-cookie';
+import { AxiosClient } from "./AxiosClient";
 const alert = LocalToast.getInstance();
+const client = AxiosClient.getInstance();
 
 export class AccountService {
-    private static baseUrl: string = `${import.meta.env.VITE_SERVER_BASE_URL}/account`;
+    private static baseUrl: string = `${import.meta.env.VITE_SERVER_SECURE_BASE_URL}/account`;
     private static instance: AccountService;
 
     public static getInstance(): AccountService {
@@ -19,28 +20,11 @@ export class AccountService {
 
     public async GetData(): Promise<Account | undefined> {
         try {
-
-            const raw = Cookie.get('JT_Token');
-            const token = raw?.replace(/^"|"$/g, "") ?? "";
-            const url = `${AccountService.baseUrl}/Profile`;
-            const response = await axios.get(url, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                },
-                withCredentials: true
-            });
-
-            if (response.status >= 200 && response.status < 300) {
-                return response.data as Account;
+            const response = await client.Get<Account>('/account/Profile');
+            if (response) {
+                return response;
             }
-            const errorOptions: ErrorOptions = {
-                cause: response.status
-            }
-            throw new Error(response.statusText, errorOptions);
-
         } catch (e) {
-            const error = e as Error;
-            alert.Error(error.message);
             return undefined;
         }
     }
