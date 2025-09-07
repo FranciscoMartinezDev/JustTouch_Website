@@ -8,7 +8,7 @@ export const FranchiseData: FC = () => {
 
     return (
         <Flex className="franchise-container" gap={5} direction={'column'}>
-            {account!.Franchises.filter(x => x.Deleted === false).map((item, index) => {
+            {account!.Franchises.filter(x => x.deleted === false).map((item, index) => {
                 return <FranchiseItem key={index} Franchise={item} FKey={index} />
             })}
         </Flex>

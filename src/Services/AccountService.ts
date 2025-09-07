@@ -22,7 +22,7 @@ export class AccountService {
         try {
             const response = await client.Get<Account>('/account/Profile');
             if (response) {
-                return response;
+                return response as Account;
             }
         } catch (e) {
             return undefined;
@@ -50,20 +50,10 @@ export class AccountService {
 
     public async UpdateAccount(account: Account): Promise<boolean> {
         try {
-            const url = `${AccountService.baseUrl}/UpdateAccount`;
-            const response = await axios.post(url, account);
-            if (response.status >= 200 && response.status < 300) {
-                alert.Success('¡Sus datos se guardaron exitosamente!');
-                return true;
-            }
-            const errorOptions: ErrorOptions = {
-                cause: response.status
-            }
-
-            throw new Error(response.statusText, errorOptions);
+            await client.post<boolean>('/account/UpdateAccount', account);
+            alert.Success('¡Sus datos se guardaron exitosamente!');
+            return true;
         } catch (e) {
-            const error = e as Error;
-            alert.Error(error.message);
             return false;
         }
     }

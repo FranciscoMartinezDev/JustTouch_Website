@@ -10,10 +10,11 @@ interface Props {
     password?: boolean,
     error?: string,
     value?: string | number | readonly string[] | undefined,
+    defaultValue?: string | number | readonly string[] | undefined,
     change?: ChangeEventHandler<HTMLInputElement>
 }
 
-export const FormInput: FC<Props> = ({ className, label, placeholder, password = false, helper, error, value, change }) => {
+export const FormInput: FC<Props> = ({ className, label, placeholder, password = false, helper, error, value, defaultValue, change }) => {
     return (
         <Field.Root className={className}>
             {label &&
@@ -26,11 +27,13 @@ export const FormInput: FC<Props> = ({ className, label, placeholder, password =
                 <Input borderColor={'lightgray'}
                     placeholder={placeholder}
                     value={value}
+                    defaultValue={defaultValue}
                     onChange={change}
                 /> :
                 <PasswordInput borderColor={'lightgray'}
                     placeholder={placeholder}
                     value={value}
+                    defaultValue={defaultValue}
                     onChange={change} />
             }
             {helper && <Field.HelperText>{helper}</Field.HelperText>}

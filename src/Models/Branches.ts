@@ -10,7 +10,7 @@ export class Branches {
   Email?: string;
   OpenTime?: string;
   CloseTime?: string;
-  Deleted: boolean = false;
+  deleted: boolean = false;
   
   constructor(init?: Partial<Branches>) {
     Object.assign(this, init);

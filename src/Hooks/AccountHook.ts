@@ -69,7 +69,7 @@ export function useFranchises() {
         handler(prev => {
             return {
                 ...prev,
-                Franchises: [...prev?.Franchises, new Franchise({ Deleted: false, FranchiseCode: franchiseCode })]
+                Franchises: [...prev?.Franchises, new Franchise({ deleted: false, FranchiseCode: franchiseCode })]
             };
         });
     };
@@ -77,7 +77,7 @@ export function useFranchises() {
     const Remove = (index: number) => {
         handler(prev => {
             const franchises = [...prev.Franchises];
-            if (franchises.length === 1) franchises[index].Deleted = true;
+            if (franchises.length === 1) franchises[index].deleted = true;
             return { ...prev, Franchises: franchises }
         });
     }
@@ -238,7 +238,7 @@ export function useBranches() {
     const Remove = (FKey: number, BKey: number) => {
         handler((prev) => {
             const franchises = [...prev.Franchises];
-            franchises[FKey].Branches[BKey].Deleted = true;
+            franchises[FKey].Branches[BKey].deleted = true;
             return { ...prev, Franchises: franchises }
         })
     }

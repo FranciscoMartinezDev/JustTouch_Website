@@ -49,14 +49,15 @@ export function ValidateAccountForm(account: Account): boolean {
     const userData: Users = account.UserData!;
     const franchises: Franchise[] = account.Franchises;
 
-    const validUserData: boolean = Object.entries(userData).every(([_, value]) => {
+    const validUserData: boolean = Object.entries(userData).every(([key, value]) => {
+        if (key.includes('AccountKey') || key.includes('CreatedDate') || key.includes('FirstLogin')) return true;
         return value !== null && value !== undefined && value !== '';
     })
     const passWords: boolean = userData.Password === userData.Repeat;
 
     const validFranchises: boolean = franchises.every(x => {
         return Object.entries(x).every(([key, value]) => {
-            if (key.includes('Branches')) return true;
+            if (key.includes('Branches') || key.includes('IdUser') || key.includes('CreatedDate')) return true;
             return value !== null && value !== undefined && value !== '';
         })
     });
@@ -64,7 +65,7 @@ export function ValidateAccountForm(account: Account): boolean {
     const validBranches: boolean = franchises.every(x => {
         return x.Branches.every(x => {
             return Object.entries(x).every(([key, value]) => {
-                if (key.includes('OpenTime') || key.includes('CloseTime') || key.includes('Email')) return true;
+                if (key.includes('OpenTime') || key.includes('CloseTime') || key.includes('Email') || key.includes('CreatedDate')) return true;
                 return value !== null && value !== undefined && value !== '';
             })
         })
@@ -98,12 +99,12 @@ export function ValidateAccountForm(account: Account): boolean {
 }
 
 export function ValidateServiceRequest(user: Users): boolean {
-    var isValid:boolean = true;
-    const emailValid:boolean = user.Email !== undefined && user.Email !== '' && user.Email != null;
-    const userNameValid:boolean = user.UserName !== undefined && user.UserName !== '' && user.UserName !== null;
+    var isValid: boolean = true;
+    const emailValid: boolean = user.Email !== undefined && user.Email !== '' && user.Email != null;
+    const userNameValid: boolean = user.UserName !== undefined && user.UserName !== '' && user.UserName !== null;
 
-    if(!emailValid && !userNameValid){
-        isValid =  false;
+    if (!emailValid && !userNameValid) {
+        isValid = false;
         alert.Error('Debe completar todos los datos para poder avanzar');
     }
 

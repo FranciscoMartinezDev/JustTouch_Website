@@ -51,11 +51,11 @@ export const FranchiseItem: FC<Props> = ({ Franchise, FKey }) => {
                     <FormInput className="franch-input"
                         placeholder="Razon social..."
                         change={e => handleCompanyName(FKey, e.target.value)}
-                        value={Franchise.CompanyName} />
+                        defaultValue={Franchise.CompanyName} />
                     <FormInput className="franch-input"
                         placeholder="CUIT..."
                         change={e => handleTaxId(FKey, e.target.value)}
-                        value={Franchise.TaxId} />
+                        defaultValue={Franchise.TaxId} />
                     <SelectForm className="franch-select"
                         placeholder="- Categoria -" data={taxCategories}
                         change={e => handleTaxCategory(FKey, e.target.value)}
@@ -75,7 +75,7 @@ export const FranchiseItem: FC<Props> = ({ Franchise, FKey }) => {
                     </Collapsible.Trigger>
                 </Flex>
                 <Collapsible.Content>
-                    {Franchise.Branches.map((item, index) => {
+                    {Franchise.Branches.filter(x => x.deleted == false).map((item, index) => {
                         return <BranchItem key={index} Branch={item} BKey={index} FKey={FKey} />
                     })}
                 </Collapsible.Content>

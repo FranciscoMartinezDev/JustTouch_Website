@@ -8,7 +8,7 @@ export class Franchise {
   TaxId?: string;
   TaxCategory?: string;
   Branches: Branches[] = [];
-  Deleted: boolean = false;
+  deleted: boolean = false;
 
   constructor(init?: Partial<Franchise>) {
     Object.assign(this, init);
