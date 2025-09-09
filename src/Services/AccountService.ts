@@ -94,4 +94,13 @@ export class AccountService {
             return undefined;
         }
     }
+
+    public async SignOut(): Promise<boolean> {
+        try {
+            var respose = await client.Get<boolean>('account/SignOut');
+            return respose;
+        } catch (e) {
+            return false;
+        }
+    }
 }

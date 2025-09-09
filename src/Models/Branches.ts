@@ -7,9 +7,6 @@ export class Branches {
   Address?: string;
   PostalCode?: string;
   PhoneNumber?: string;
-  Email?: string;
-  OpenTime?: string;
-  CloseTime?: string;
   deleted: boolean = false;
   
   constructor(init?: Partial<Branches>) {

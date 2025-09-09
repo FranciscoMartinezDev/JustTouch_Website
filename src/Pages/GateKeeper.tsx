@@ -9,12 +9,10 @@ export const Gatekeeper: FC = () => {
     const { hasToken, twinToken } = useAuthenticationContext();
     const store = Storage.getInstance();
     const branch = store.Get<string>('branch_code');
-
     const franchises: Franchise[] = store.Get('Franchises') || [];
-
     const token = hasToken();
     const twin = twinToken();
-
+    console.log(!branch && franchises.length > 0)
 
     if (!token) {
         store.Dispose();

@@ -5,8 +5,11 @@ import { FaRegCircleUser } from "react-icons/fa6";
 import './Layout.scss';
 import { useAccountContext } from '@/Context/AccountContext';
 import { Loader } from '@/components/local/Loader';
+import { useAuthenticationContext } from '@/Context/AuthenticationContext';
 
 const AccountButton: FC = () => {
+    const { SignOut } = useAuthenticationContext();
+
     return (
         <Menu.Root>
             <Menu.Trigger asChild>
@@ -26,7 +29,7 @@ const AccountButton: FC = () => {
                             Cambiar negocio
                         </Menu.Item>
                         <Separator bg={'gray'} />
-                        <Menu.Item value="" style={{ color: 'gray' }}>
+                        <Menu.Item value="" style={{ color: 'gray' }} onClick={SignOut}>
                             Cerrar Session
                         </Menu.Item>
                     </Menu.Content>

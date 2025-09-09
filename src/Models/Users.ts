@@ -6,7 +6,6 @@ export class Users {
     Password?: string;
     Repeat?: string;
     UserName?: string;
-    FirstLogin?: string;
 
     constructor(init?: Partial<Users>) {
         Object.assign(this, init);
