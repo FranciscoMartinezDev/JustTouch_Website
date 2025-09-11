@@ -1,4 +1,4 @@
-import { createBrowserRouter as JustTouchBrowser, Navigate } from 'react-router';
+import { createBrowserRouter as JustTouchBrowser } from 'react-router';
 import { Layout } from '@/Pages/Layout';
 import { Gatekeeper } from '@/Pages/Gatekeeper';
 import { Account } from '@/Pages/Account/Account';
@@ -32,7 +32,7 @@ export const routes = JustTouchBrowser([
         children: [
             {
                 path: '/',
-                element: <Navigate to={'/profile/account'} />
+                element: <></>
             },
             {
                 path: '/profile/account',

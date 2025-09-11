@@ -12,7 +12,6 @@ export const Gatekeeper: FC = () => {
     const franchises: Franchise[] = store.Get('Franchises') || [];
     const token = hasToken();
     const twin = twinToken();
-    console.log(!branch && franchises.length > 0)
 
     if (!token) {
         store.Dispose();

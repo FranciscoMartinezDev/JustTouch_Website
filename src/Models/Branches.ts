@@ -7,7 +7,6 @@ export class Branches {
   Address?: string;
   PostalCode?: string;
   PhoneNumber?: string;
-  deleted: boolean = false;
   
   constructor(init?: Partial<Branches>) {
     Object.assign(this, init);

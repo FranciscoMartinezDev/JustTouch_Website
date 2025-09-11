@@ -7,15 +7,15 @@ import { AuthenticationProvider } from '@/Context/AuthenticationContext';
 
 function App() {
   return (
-    <AuthenticationProvider>
-      <ServiceRequestProvider>
-        <AccountProvider>
+    <AccountProvider>
+      <AuthenticationProvider>
+        <ServiceRequestProvider>
           <MenuProvider>
-              <RouterProvider router={routes} />
+            <RouterProvider router={routes} />
           </MenuProvider>
-        </AccountProvider>
-      </ServiceRequestProvider>
-    </AuthenticationProvider>
+        </ServiceRequestProvider>
+      </AuthenticationProvider>
+    </AccountProvider>
   )
 }
 

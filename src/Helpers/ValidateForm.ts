@@ -50,14 +50,14 @@ export function ValidateAccountForm(account: Account): boolean {
     const franchises: Franchise[] = account.Franchises;
 
     const validUserData: boolean = Object.entries(userData).every(([key, value]) => {
-        if (key.includes('AccountKey') || key.includes('CreatedDate') || key.includes('FirstLogin')) return true;
+        if (key.includes('CreatedDate')) return true;
         return value !== null && value !== undefined && value !== '';
     })
     const passWords: boolean = userData.Password === userData.Repeat;
 
     const validFranchises: boolean = franchises.every(x => {
         return Object.entries(x).every(([key, value]) => {
-            if (key.includes('Branches') || key.includes('IdUser') || key.includes('CreatedDate')) return true;
+            if (key.includes('Branches') || key.includes('CreatedDate')) return true;
             return value !== null && value !== undefined && value !== '';
         })
     });
@@ -65,7 +65,7 @@ export function ValidateAccountForm(account: Account): boolean {
     const validBranches: boolean = franchises.every(x => {
         return x.Branches.every(x => {
             return Object.entries(x).every(([key, value]) => {
-                if (key.includes('OpenTime') || key.includes('CloseTime') || key.includes('Email') || key.includes('CreatedDate')) return true;
+                if (key.includes('CreatedDate')) return true;
                 return value !== null && value !== undefined && value !== '';
             })
         })

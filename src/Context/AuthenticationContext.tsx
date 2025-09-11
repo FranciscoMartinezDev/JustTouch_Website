@@ -51,7 +51,7 @@ export const AuthenticationProvider: FC<ContextChildren> = ({ children }) => {
             store.Set('Franchises', account.Franchises || []);
             if (account.Franchises.length === 1) {
                 if (account.Franchises[0].Branches.length === 1) {
-                    store.Set('branch_code', account.Franchises[0].Branches[0]);
+                    store.Set('branch_code', account.Franchises[0].Branches[0].BranchCode);
                 }
             }
             setSigning(false);

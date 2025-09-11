@@ -8,6 +8,8 @@ import { ValidateAccountForm } from '@/Helpers/ValidateForm';
 import { Storage } from '@/Store/Storage';
 import { generateRandomString } from 'ts-randomstring/lib';
 import { Branches } from '@/Models/Branches';
+import { Navigate } from 'react-router';
+import { LocalToast } from '@/components/local/Toast';
 
 const AccountContext = createContext<AccountType | undefined>(undefined);
 
@@ -20,9 +22,12 @@ export const useAccountContext = (): AccountType => {
 export const AccountProvider: FC<ContextChildren> = ({ children }) => {
     const [account, setAccount] = useState<Account>(new Account());
     const [loadingAccount, setLoaddingAccount] = useState<boolean>(false);
+    const [deletedFranchises, setDeletedFranchises] = useState<Franchise[]>([]);
+    const [deletedBranches, setDeletedBranches] = useState<Branches[]>([]);
 
     const service: AccountService = AccountService.getInstance();
     const store = Storage.getInstance();
+    const alert = LocalToast.getInstance();
 
     const Initialize = async () => {
         setLoaddingAccount(true);
@@ -48,6 +53,12 @@ export const AccountProvider: FC<ContextChildren> = ({ children }) => {
         setAccount(prev => callback(prev));
     }
 
+    const FranchiseDeleted = (callback: (prev: Franchise[]) => Franchise[]) => {
+        setDeletedFranchises(prev => callback(prev));
+    }
+    const BranchesDeleted = (callback: (prev: Branches[]) => Branches[]) => {
+        setDeletedBranches(prev => callback(prev));
+    }
     const LeaveAccount = () => {
         var validate = ValidateAccountForm(account);
         if (validate) {
@@ -57,10 +68,14 @@ export const AccountProvider: FC<ContextChildren> = ({ children }) => {
 
     const SaveChange = async () => {
         const validate = ValidateAccountForm(account);
+
         if (validate) {
-            const result = await service.UpdateAccount(account);
+            alert.Loading('Guardando sus cambios...')
+            const result = await service.UpdateAccount(account, deletedFranchises, deletedBranches);
             const branch = store.Get('branch_code');
             if (result) {
+                alert.Dispose();
+                alert.Success('¡Sus cambios se han guardado exitosamente!');
                 if (!branch) {
                     const franchises: Franchise[] = account.Franchises;
                     const franch = franchises.map(({ IdFranchise, ...franchise }) => {
@@ -69,14 +84,16 @@ export const AccountProvider: FC<ContextChildren> = ({ children }) => {
                         return franchise;
                     })
                     store.Set('branch_code', franch[0].Branches[0].BranchCode);
-                    return;
                 }
+                return <Navigate to={'/profile/menu'} />;
             }
         }
     }
 
     return (
-        <AccountContext.Provider value={{ account, loadingAccount, handler, Initialize, SaveChange, LeaveAccount }}>
+        <AccountContext.Provider value={{
+            account, loadingAccount, handler, FranchiseDeleted, BranchesDeleted, Initialize, SaveChange, LeaveAccount
+        }}>
             {children}
         </AccountContext.Provider>
     )

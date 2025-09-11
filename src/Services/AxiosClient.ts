@@ -30,7 +30,6 @@ export class AxiosClient {
         }, (error: AxiosError) => {
             Cookie.remove('JT_Token');
             store.Dispose();
-            store.Set('SessionExpired', error.message);
             return Promise.reject(error);
         })
 
@@ -44,7 +43,10 @@ export class AxiosClient {
                     }
                 } else if (error.request) {
                     toast.Error('Error: ' + error.message);
-                } else {
+                } else if(error.response){
+                    toast.Error('Error: ' + error.message);
+                }
+                else {
                     toast.Error(error.message);
                 }
                 return Promise.reject(error);

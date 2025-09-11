@@ -75,7 +75,7 @@ export const FranchiseItem: FC<Props> = ({ Franchise, FKey }) => {
                     </Collapsible.Trigger>
                 </Flex>
                 <Collapsible.Content>
-                    {Franchise.Branches.filter(x => x.deleted == false).map((item, index) => {
+                    {Franchise.Branches.map((item, index) => {
                         return <BranchItem key={index} Branch={item} BKey={index} FKey={FKey} />
                     })}
                 </Collapsible.Content>

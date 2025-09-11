@@ -60,16 +60,15 @@ export function useUserData() {
     }
 }
 
-
 export function useFranchises() {
-    const { handler } = useAccountContext();
+    const { handler, FranchiseDeleted } = useAccountContext();
 
     const Push = () => {
         const franchiseCode: string = generateRandomString({ length: 10 });
         handler(prev => {
             return {
                 ...prev,
-                Franchises: [...prev?.Franchises, new Franchise({ deleted: false, FranchiseCode: franchiseCode })]
+                Franchises: [...prev?.Franchises, new Franchise({ IdFranchise: 0, FranchiseCode: franchiseCode })]
             };
         });
     };
@@ -77,7 +76,14 @@ export function useFranchises() {
     const Remove = (index: number) => {
         handler(prev => {
             const franchises = [...prev.Franchises];
-            if (franchises.length === 1) franchises[index].deleted = true;
+            if (franchises.length > 1) {
+                FranchiseDeleted(prev => {
+                    const deleted = [...prev];
+                    deleted.push(franchises[index] as Franchise);
+                    return deleted;
+                })
+                franchises.splice(index, 1);
+            }
             return { ...prev, Franchises: franchises }
         });
     }
@@ -126,7 +132,7 @@ export function useFranchises() {
 
 
 export function useBranches() {
-    const { handler } = useAccountContext();
+    const { handler, BranchesDeleted } = useAccountContext();
 
     const handleCountry = (findex: number, bindex: number, value: string) => {
         handler((prev) => {
@@ -194,43 +200,11 @@ export function useBranches() {
         })
     }
 
-    const handleEmail = (findex: number, bindex: number, value: string) => {
-        handler((prev) => {
-            const franchises = [...prev.Franchises];
-            const branches = [...franchises[findex].Branches];
-            branches[bindex].Email = value;
-            franchises[findex].Branches = branches;
-
-            return { ...prev, Franchises: franchises }
-        })
-    }
-
-    const handleOpenTime = (findex: number, bindex: number, value: string) => {
-        handler((prev) => {
-            const franchises = [...prev.Franchises];
-            const branches = [...franchises[findex].Branches];
-            branches[bindex].OpenTime = value;
-            franchises[findex].Branches = branches;
-
-            return { ...prev, Franchises: franchises }
-        })
-    }
-
-    const handleCloseTime = (findex: number, bindex: number, value: string) => {
-        handler((prev) => {
-            const franchises = [...prev.Franchises];
-            const branches = [...franchises[findex].Branches];
-            branches[bindex].CloseTime = value;
-            franchises[findex].Branches = branches;
-            return { ...prev, Franchises: franchises }
-        })
-    }
-
     const Push = (FKey: number) => {
         const branchCode: string = generateRandomString({ length: 10 });
         handler((prev) => {
             const franchises = [...prev.Franchises];
-            franchises[FKey].Branches.push(new Branches({ BranchCode: branchCode }));
+            franchises[FKey].Branches.push(new Branches({ IdBranch: 0, BranchCode: branchCode }));
             return { ...prev, Franchises: franchises }
         })
     }
@@ -238,7 +212,14 @@ export function useBranches() {
     const Remove = (FKey: number, BKey: number) => {
         handler((prev) => {
             const franchises = [...prev.Franchises];
-            franchises[FKey].Branches[BKey].deleted = true;
+            if (franchises[FKey].Branches.length > 1) {
+                BranchesDeleted(branch => {
+                    const deleted = [...branch];
+                    deleted.push(franchises[FKey].Branches[BKey]);
+                    return deleted;
+                })
+                franchises[FKey].Branches.splice(BKey, 1);
+            }
             return { ...prev, Franchises: franchises }
         })
     }
@@ -250,9 +231,6 @@ export function useBranches() {
         handleAddress,
         handlePostalCode,
         handlePhoneNumber,
-        handleEmail,
-        handleOpenTime,
-        handleCloseTime,
         Push,
         Remove
     }

@@ -39,9 +39,11 @@ export class LocalToast {
     }
 
     public Loading(message: string) {
-        toaster.loading({
-            description: message
-        })
+        toaster.create({
+            description: message,
+            type: "loading",
+            id: 'loading'
+        });
     }
 
     public Dispose() {

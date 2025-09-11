@@ -4,6 +4,8 @@ import type { Users } from "@/Models/Users";
 import axios from "axios";
 import { Session } from '@/Models/Session';
 import { AxiosClient } from "./AxiosClient";
+import type { Franchise } from "@/Models/Franchise";
+import type { Branches } from "@/Models/Branches";
 const alert = LocalToast.getInstance();
 const client = AxiosClient.getInstance();
 
@@ -48,10 +50,14 @@ export class AccountService {
         }
     }
 
-    public async UpdateAccount(account: Account): Promise<boolean> {
+    public async UpdateAccount(account: Account, deletedFranchises: Franchise[], deletedBranches: Branches[]): Promise<boolean> {
         try {
-            await client.post<boolean>('/account/UpdateAccount', account);
-            alert.Success('¡Sus datos se guardaron exitosamente!');
+            var request = {
+                Account: account,
+                DeletedFranchises: deletedFranchises,
+                DeletedBranches: deletedBranches,
+            }
+            await client.post<boolean>('/account/UpdateAccount', request);
             return true;
         } catch (e) {
             return false;
