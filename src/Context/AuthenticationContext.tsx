@@ -11,7 +11,6 @@ import type { Account } from '@/Models/Account';
 
 const AuthenticationContext = createContext<AuthenticationType | undefined>(undefined);
 
-
 export const useAuthenticationContext = (): AuthenticationType => {
     const context = useContext(AuthenticationContext);
     if (!context) {
@@ -19,7 +18,6 @@ export const useAuthenticationContext = (): AuthenticationType => {
     }
     return context;
 }
-
 
 export const AuthenticationProvider: FC<ContextChildren> = ({ children }) => {
     const [user, setUser] = useState<Users>(new Users());
@@ -52,6 +50,7 @@ export const AuthenticationProvider: FC<ContextChildren> = ({ children }) => {
             if (account.Franchises.length === 1) {
                 if (account.Franchises[0].Branches.length === 1) {
                     store.Set('branch_code', account.Franchises[0].Branches[0].BranchCode);
+                    window.location.reload();
                 }
             }
             setSigning(false);
@@ -73,6 +72,10 @@ export const AuthenticationProvider: FC<ContextChildren> = ({ children }) => {
         window.location.href = '/profile/menu';
     }
 
+    const RemoveBranch = () => {
+        store.Remove('branch_code');
+        location.reload();
+    }
     const hasToken = (): boolean => {
         const token = Cookie.get('JT_Token');
         const storageToken = store.Get('token');
@@ -87,7 +90,7 @@ export const AuthenticationProvider: FC<ContextChildren> = ({ children }) => {
 
 
     return (
-        <AuthenticationContext.Provider value={{ user, signing, signed, handleEmail, handlePassword, SignIn, SignOut, SelectBusiness, hasToken, twinToken }}>
+        <AuthenticationContext.Provider value={{ user, signing, signed, handleEmail, handlePassword, SignIn, SignOut, RemoveBranch, SelectBusiness, hasToken, twinToken }}>
             {children}
         </AuthenticationContext.Provider>
     )

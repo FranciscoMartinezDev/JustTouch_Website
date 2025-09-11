@@ -22,7 +22,7 @@ export const Signin: FC = () => {
     if (token && twin && !branch && franchises.length === 0) {
         return <Navigate to={'/profile/account'} />
     } else if (token && twin && branch && franchises.length === 1 && franchises[0].Branches.length === 1) {
-        return <Navigate to={'/profile/account'} />
+        return <Navigate to={'/profile/menu'} />
     } else {
         return (
             <Box className="sign-in" colorPalette={'cyan'}>

@@ -8,6 +8,7 @@ export type AuthenticationType = {
     handlePassword: (value: string) => void,
     SignIn: () => void,
     SignOut: () => void,
+    RemoveBranch: () => void,
     SelectBusiness: (branchCode: string) => void,
     hasToken: () => boolean,
     twinToken: () => boolean

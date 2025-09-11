@@ -8,7 +8,7 @@ import { Loader } from '@/components/local/Loader';
 import { useAuthenticationContext } from '@/Context/AuthenticationContext';
 
 const AccountButton: FC = () => {
-    const { SignOut } = useAuthenticationContext();
+    const { SignOut, RemoveBranch } = useAuthenticationContext();
 
     return (
         <Menu.Root>
@@ -22,10 +22,10 @@ const AccountButton: FC = () => {
             <Portal>
                 <Menu.Positioner>
                     <Menu.Content style={{ boxShadow: '0 0 5px 1px gray' }}>
-                        <Menu.Item value="" style={{ color: 'gray' }}>
+                        <Menu.Item value="" style={{ color: 'gray' }} onClick={() => { location.href = '/profile/account' }}>
                             Cuenta
                         </Menu.Item>
-                        <Menu.Item value="" style={{ color: 'gray' }}>
+                        <Menu.Item value="" style={{ color: 'gray' }} onClick={RemoveBranch}>
                             Cambiar negocio
                         </Menu.Item>
                         <Separator bg={'gray'} />

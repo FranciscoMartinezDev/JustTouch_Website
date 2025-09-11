@@ -68,7 +68,7 @@ export const AccountProvider: FC<ContextChildren> = ({ children }) => {
 
     const SaveChange = async () => {
         const validate = ValidateAccountForm(account);
-
+        
         if (validate) {
             alert.Loading('Guardando sus cambios...')
             const result = await service.UpdateAccount(account, deletedFranchises, deletedBranches);
