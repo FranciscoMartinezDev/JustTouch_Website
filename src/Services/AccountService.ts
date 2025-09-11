@@ -6,6 +6,8 @@ import { Session } from '@/Models/Session';
 import { AxiosClient } from "./AxiosClient";
 import type { Franchise } from "@/Models/Franchise";
 import type { Branches } from "@/Models/Branches";
+import type { Authentication } from "@/Models/Authentication";
+import Cookie from 'js-cookie';
 const alert = LocalToast.getInstance();
 const client = AxiosClient.getInstance();
 
@@ -57,7 +59,11 @@ export class AccountService {
                 DeletedFranchises: deletedFranchises,
                 DeletedBranches: deletedBranches,
             }
-            await client.post<boolean>('/account/UpdateAccount', request);
+            const response =  await client.post<Authentication>('/account/UpdateAccount', request);
+
+            Cookie.remove('JT_Token');
+            Cookie.set('JT_Token', response.access_token!, { expires: response.expires_in });
+            
             return true;
         } catch (e) {
             return false;

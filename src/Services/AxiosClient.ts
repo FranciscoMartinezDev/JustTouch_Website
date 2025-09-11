@@ -40,10 +40,13 @@ export class AxiosClient {
                     if (error.response.status === 401) {
                         Cookie.remove('JT_Token');
                         store.Dispose();
+                    } else {
+                        toast.Dispose();
+                        toast.Error('Error: ' + error.message);
                     }
                 } else if (error.request) {
                     toast.Error('Error: ' + error.message);
-                } else if(error.response){
+                } else if (error.response) {
                     toast.Error('Error: ' + error.message);
                 }
                 else {

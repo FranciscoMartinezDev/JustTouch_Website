@@ -87,6 +87,7 @@ export const AccountProvider: FC<ContextChildren> = ({ children }) => {
                 }
                 return <Navigate to={'/profile/menu'} />;
             }
+            
         }
     }
 
