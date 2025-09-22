@@ -2,9 +2,16 @@ import { Button, Card, Checkbox, Collapsible, Flex, Heading, List, Text } from "
 import { Tooltip } from "@/components/ui/tooltip";
 import { FaAngleUp, FaRegRectangleXmark, FaPenToSquare } from "react-icons/fa6";
 import type { FC } from "react";
-import '../Menu.scss'
+import { Menu } from '@/Models/Menu';
+import '../Menu.scss';
 
-export const CatalogItem: FC = () => {
+interface Props {
+    Catalog: Menu;
+}
+
+
+export const CatalogItem: FC<Props> = ({ Catalog }) => {
+    
     return (
         <Collapsible.Root>
             <Card.Root className="catalog-card">

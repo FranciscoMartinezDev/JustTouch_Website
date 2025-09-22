@@ -1,5 +1,5 @@
 export class Product {
-  IdProduct?: number;
+  IdProduct: number = 0;
   ProductCode?: string | undefined;
   Name?: string | undefined;
   Description?: string | undefined;
@@ -7,7 +7,6 @@ export class Product {
   IsAvailable!: boolean;
   PictureUrl?: string;
   Picture?: File;
-  Deleted: boolean = false;
 
   constructor(init?: Partial<Product>) {
     Object.assign(this, init);

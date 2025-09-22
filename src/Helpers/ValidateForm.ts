@@ -11,7 +11,7 @@ export function ValidateMenuForm(menu: Menu): boolean {
     const validCatalog = menu.Catalog !== '' && menu.Catalog !== undefined
 
     const validProducts: boolean = menu.Products.every(v => Object.entries(v).every(([key, value]) => {
-        if (key.includes('Picture') || key.includes('PictureUrl')) return true;
+        if (key.includes('Picture') || key.includes('PictureUrl') || key.includes('ProductCode')) return true;
         return value !== null && value !== undefined && value !== '';
     }))
 

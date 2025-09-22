@@ -1,10 +1,13 @@
 import { LocalToast } from "@/components/local/Toast";
 import type { Menu } from "@/Models/Menu";
-import axios from "axios";
+import { Storage } from "@/Store/Storage";
+import { AxiosClient } from "@/Services/AxiosClient";
 const alert = LocalToast.getInstance();
+const store = Storage.getInstance();
+const client = AxiosClient.getInstance();
 
 export class MenuService {
-    private static baseUrl: string = `${import.meta.env.VITE_SERVER_BASE_URL}/menu`;
+    private static baseUrl: string = `${import.meta.env.VITE_SERVER_SECURE_BASE_URL}/menu`;
     private static instance: MenuService;
 
     public static getInstance(): MenuService {
@@ -14,17 +17,12 @@ export class MenuService {
         return MenuService.instance;
     }
 
-    public async GetMenu(BranchCode: string): Promise<Menu[] | undefined> {
+    public async GetMenu(): Promise<Menu[] | undefined> {
         try {
-            const url = `${MenuService.baseUrl}/${BranchCode}`
-            const response = await axios.get(url);
-            if (response.status >= 200 && response.status <= 300) {
-                return response.data as Menu[];
-            }
-            const errorOptions: ErrorOptions = {
-                cause: response.status
-            }
-            throw new Error(response.statusText, errorOptions);
+            const branchCode = store.Get<string>('branch_code');
+            const url = `${MenuService.baseUrl}/${branchCode}`
+            const response = await client.Get<Menu[] | []>(url);
+            return response as Menu[];
         } catch (e) {
             const error = e as Error;
             alert.Error(error.message);
@@ -35,14 +33,10 @@ export class MenuService {
     public async GetCatalog(CatalogCode: string): Promise<Menu | undefined> {
         try {
             const url = `${MenuService.baseUrl}/Catalog/${CatalogCode}`;
-            const response = await axios.get(url);
-            if (response.status >= 200 && response.status <= 300) {
-                return response.data as Menu;
+            const response = await client.Get<Menu | undefined>(url);
+            if (!response) {
+                return response;
             }
-            const errorOptions: ErrorOptions = {
-                cause: response.status
-            }
-            throw new Error(response.statusText, errorOptions);
         } catch (e) {
             const error = e as Error;
             alert.Error(error.message);
@@ -52,18 +46,16 @@ export class MenuService {
 
     public async AddCatalog(menu: FormData): Promise<boolean> {
         try {
-            const url = `${MenuService.baseUrl}/AddCatalog`;
-            const response = await axios.post(url, menu);
-            if (response.status >= 200 && response.status <= 300) {
-                alert.Dispose();
-                alert.Success('¡Catalogo añadido exitosamente!')
-                return true;
-            }
 
-            const errorOptions: ErrorOptions = {
-                cause: response.status
-            }
-            throw new Error(response.statusText, errorOptions);
+            const url = `${MenuService.baseUrl}/AddCatalog`;
+            const response = await client.Post<boolean>(url, menu, {
+                headers:{
+                    "Content-Type": "multipart/form-data"
+                }
+            });
+            alert.Dispose();
+            alert.Success('¡Catalogo añadido exitosamente!')
+            return response;
         } catch (e) {
             const error = e as Error;
             alert.Error(error.message);
@@ -74,15 +66,10 @@ export class MenuService {
     public async UpdateCatalog(menu: FormData): Promise<boolean> {
         try {
             const url = `${MenuService.baseUrl}/EditCatalog`;
-            const response = await axios.post(url, menu);
-            if (response.status >= 200 && response.status < 300) {
-                alert.Success('¡Menu actualizado!');
-                return true;
-            }
-            const errorOptions: ErrorOptions = {
-                cause: response.status
-            }
-            throw new Error(response.statusText, errorOptions);
+            const response = await client.Post<boolean>(url, menu);
+            alert.Dispose();
+            alert.Success('¡Catalogo actualizado!');
+            return response;
         } catch (e) {
             const error = e as Error;
             alert.Error(error.message);

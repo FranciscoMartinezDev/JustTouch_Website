@@ -11,8 +11,13 @@ import { useParams } from "react-router";
 
 export const MenuInfo: FC = () => {
     const { handleCatalog, PushProduct } = useMenu();
-    const { menu, SaveChange, Initialize } = useMenuContext();
+    const { catalog, SaveChanges, Initialize } = useMenuContext();
     const { catalogKey } = useParams();
+
+    const GoMenu = () => {
+        location.href = '/profile/menu';
+    }
+
     useEffect(() => {
         Initialize(catalogKey);
     }, [])
@@ -20,10 +25,13 @@ export const MenuInfo: FC = () => {
     return (
         <Page Title="Cargar productos"
             Actions={<HStack>
-                <Button variant={'outline'} colorPalette={'blue'} borderWidth={2}>
+                <Button onClick={GoMenu}
+                    variant={'outline'}
+                    colorPalette={'blue'}
+                    borderWidth={2}>
                     <FaChevronLeft />Volver
                 </Button>
-                <Button variant={'solid'} onClick={SaveChange}>
+                <Button variant={'solid'} onClick={() => SaveChanges(undefined) }>
                     <FaRegFloppyDisk /> Guardar cambios
                 </Button>
             </HStack>}
@@ -34,11 +42,11 @@ export const MenuInfo: FC = () => {
                             label="Catalogo"
                             placeholder=". . ."
                             change={e => handleCatalog(e.target.value)}
-                            value={menu.Catalog} />
+                            value={catalog.Catalog} />
                         <Button colorPalette={'teal'} onClick={PushProduct}>Cargar productos</Button>
                     </Flex>
                     <Box className="product-list">
-                        {menu.Products.filter(x => x.IdProduct !== undefined).map((item, index) => {
+                        {catalog.Products.map((item, index) => {
                             return <ProductItem Product={item} PKey={index} key={index} />
                         })}
                     </Box>

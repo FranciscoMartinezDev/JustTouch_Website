@@ -1,8 +1,13 @@
-import type { Menu } from "../Menu"
+import { Menu } from "@/Models/Menu";
+import { Product } from '@/Models/Product';
 
 export type MenuContextType = {
-    menu: Menu,
+    menu: Menu[],
+    catalog: Menu,
+    deletedProducts: Product[],
     handler: (callback: (prev: Menu) => Menu) => void,
-    SaveChange: () => void,
+    DeletedProducts: (callback: (prev: Product[]) => Product[]) => void,
+    SaveChanges: (catalogKey: string | undefined) => void,
     Initialize: (catalogKey: string | undefined) => void,
+    LoadMenu: () => void,
 }

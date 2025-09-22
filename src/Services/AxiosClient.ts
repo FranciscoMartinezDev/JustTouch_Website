@@ -67,7 +67,7 @@ export class AxiosClient {
         return this.instance.get<T>(url, config).then(x => x.data);
     }
 
-    public post<T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
+    public Post<T>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
         return this.instance.post<T>(url, data, config).then(res => res.data);
     }
 }

@@ -1,10 +1,9 @@
 import { useMenuContext } from "@/Context/MenuContext";
 import { Product } from "@/Models/Product";
 import type { ChangeEvent } from "react";
-import { generateRandomString } from 'ts-randomstring/lib';
 
 export default function useMenu() {
-    const { handler } = useMenuContext();
+    const { handler, DeletedProducts } = useMenuContext();
 
     const handleCatalog = (value: string) => {
         handler((prev) => {
@@ -81,16 +80,19 @@ export default function useMenu() {
     }
 
     const PushProduct = () => {
-        const productCode: string = generateRandomString({ length: 10 });
         handler((prev) => {
-            return { ...prev, Products: [...prev.Products, new Product({ ProductCode: productCode, IdMenu: 0, IsAvailable: true })] }
+            return { ...prev, Products: [...prev.Products, new Product({ IdProduct: 0, IsAvailable: true })] }
         })
     }
 
     const RemoveProduct = (index: number) => {
         handler((prev) => {
             const productList = [...prev.Products];
-            productList[index].Deleted = true;
+            DeletedProducts(prod => {
+                prod.push(productList[index]);
+                return prod;
+            })
+            productList.splice(index, 1);
             return { ...prev, Products: productList };
         })
     }

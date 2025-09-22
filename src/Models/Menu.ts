@@ -1,5 +1,6 @@
 import { Product } from "./Product";
 
+
 export class Menu {
     CatalogCode?: string;
     BranchCode?: string;

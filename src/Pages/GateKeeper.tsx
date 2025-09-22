@@ -12,7 +12,6 @@ export const Gatekeeper: FC = () => {
     const franchises: Franchise[] = store.Get('Franchises') || [];
     const token = hasToken();
     const twin = twinToken();
-
     if (!token) {
         store.Dispose();
         Cookie.remove('JT_Token');
