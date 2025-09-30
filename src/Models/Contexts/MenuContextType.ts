@@ -5,6 +5,7 @@ export type MenuContextType = {
     menu: Menu[],
     catalog: Menu,
     deletedProducts: Product[],
+    loadingMenu: boolean,
     handler: (callback: (prev: Menu) => Menu) => void,
     DeletedProducts: (callback: (prev: Product[]) => Product[]) => void,
     SaveChanges: (catalogKey: string | undefined) => void,

@@ -70,7 +70,6 @@ export default function useMenu() {
                     if (i === index) {
                         prd.Picture = undefined;
                         prd.PictureUrl = undefined;
-                        console.log(prd)
                         return prd;
                     }
                     return prd;

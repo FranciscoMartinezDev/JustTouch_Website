@@ -6,6 +6,7 @@ import './Layout.scss';
 import { useAccountContext } from '@/Context/AccountContext';
 import { Loader } from '@/components/local/Loader';
 import { useAuthenticationContext } from '@/Context/AuthenticationContext';
+import { useMenuContext } from '@/Context/MenuContext';
 
 const AccountButton: FC = () => {
     const { SignOut, RemoveBranch } = useAuthenticationContext();
@@ -46,9 +47,10 @@ interface Props {
 
 export const Layout: FC<Props> = ({ children }) => {
     const { loadingAccount } = useAccountContext();
+    const { loadingMenu } = useMenuContext();
     return (
         <>
-            {loadingAccount ? <Loader /> : null}
+            {loadingAccount || loadingMenu ? <Loader /> : null}
             <Box className='layout'>
                 <Toaster />
                 <Flex className='nav-header'

@@ -34,9 +34,7 @@ export class MenuService {
         try {
             const url = `${MenuService.baseUrl}/Catalog/${CatalogCode}`;
             const response = await client.Get<Menu | undefined>(url);
-            if (!response) {
-                return response;
-            }
+            return response! as Menu;
         } catch (e) {
             const error = e as Error;
             alert.Error(error.message);
@@ -49,7 +47,7 @@ export class MenuService {
 
             const url = `${MenuService.baseUrl}/AddCatalog`;
             const response = await client.Post<boolean>(url, menu, {
-                headers:{
+                headers: {
                     "Content-Type": "multipart/form-data"
                 }
             });

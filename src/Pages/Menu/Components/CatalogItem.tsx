@@ -1,7 +1,7 @@
 import { Button, Card, Checkbox, Collapsible, Flex, Heading, List, Text } from "@chakra-ui/react";
 import { Tooltip } from "@/components/ui/tooltip";
 import { FaAngleUp, FaRegRectangleXmark, FaPenToSquare } from "react-icons/fa6";
-import type { FC } from "react";
+import { useState, type CSSProperties, type FC } from "react";
 import { Menu } from '@/Models/Menu';
 import '../Menu.scss';
 
@@ -11,13 +11,31 @@ interface Props {
 
 
 export const CatalogItem: FC<Props> = ({ Catalog }) => {
+    const [collapsed, setCollapsed] = useState<boolean>(false);
+
+    const collapse = () => {
+        if (!collapsed) {
+            setCollapsed(true);
+        } else {
+            setCollapsed(false);
+        }
+    }
+
+    const rotateButton: CSSProperties = {
+        transform: `rotateZ(${collapsed ? '180deg' : '0'})`,
+        transition: '.2s ease-in ease-out'
+    }
+
+    const Edit = (catalogKey: string) => {
+        location.href = `/profile/edit-product-group/${catalogKey}`
+    }
     
     return (
         <Collapsible.Root>
             <Card.Root className="catalog-card">
                 <Card.Header padding={0}>
                     <Flex className="catalog-header">
-                        <Heading as={"h1"} color={'gray'}>Catalogo</Heading>
+                        <Heading as={"h1"} color={'gray'}>{Catalog.Catalog}</Heading>
                         <Flex spaceX={1} className="catalog-actions">
                             <Tooltip content='Quitar grupo'>
                                 <Button colorPalette={'red'}>
@@ -25,12 +43,12 @@ export const CatalogItem: FC<Props> = ({ Catalog }) => {
                                 </Button>
                             </Tooltip>
                             <Tooltip content='Editar grupo'>
-                                <Button bg={'orange.400'}>
+                                <Button bg={'orange.400'} onClick={() => Edit(Catalog.CatalogCode!)}>
                                     <FaPenToSquare />
                                 </Button>
                             </Tooltip>
                             <Collapsible.Trigger>
-                                <Button bg={'white'} color={'gray'}>
+                                <Button bg={'white'} color={'gray'} onClick={collapse} style={rotateButton}>
                                     <FaAngleUp />
                                 </Button>
                             </Collapsible.Trigger>
@@ -39,20 +57,23 @@ export const CatalogItem: FC<Props> = ({ Catalog }) => {
                 </Card.Header>
                 <Collapsible.Content>
                     <Card.Body className="catalog-body">
-                        <List.Root>
-                            <List.Item>
-                                <Text>Producto</Text>
-                                <Flex className="product-actions">
-                                    <Text>$455</Text>
-                                    <Checkbox.Root>
-                                        <Checkbox.HiddenInput />
-                                        <Checkbox.Control />
-                                        <Checkbox.Label>Disponible</Checkbox.Label>
-                                    </Checkbox.Root>
-                                </Flex>
-                            </List.Item>
+                        <List.Root gap={7}>
+                            {Catalog.Products.map((prod, index) => {
+                                return (
+                                    <List.Item key={index}>
+                                        <Text>{prod.Name}</Text>
+                                        <Flex className="product-actions">
+                                            <Text>$ {prod.Price}</Text>
+                                            <Checkbox.Root checked={prod.IsAvailable}>
+                                                <Checkbox.HiddenInput />
+                                                <Checkbox.Control />
+                                                <Checkbox.Label>Disponible</Checkbox.Label>
+                                            </Checkbox.Root>
+                                        </Flex>
+                                    </List.Item>
+                                )
+                            })}
                         </List.Root>
-
                     </Card.Body>
                 </Collapsible.Content>
             </Card.Root>

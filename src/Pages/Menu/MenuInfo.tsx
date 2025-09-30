@@ -23,7 +23,7 @@ export const MenuInfo: FC = () => {
     }, [])
 
     return (
-        <Page Title="Cargar productos"
+        <Page Title={catalogKey != undefined ? 'Editar catalogo' : 'Cargar productos'}
             Actions={<HStack>
                 <Button onClick={GoMenu}
                     variant={'outline'}

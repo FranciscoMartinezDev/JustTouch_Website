@@ -13,6 +13,9 @@ export function MenuToFormData(menu: Menu): FormData {
     formData.append(`Products[${index}].Description`, prod.Description!);
     formData.append(`Products[${index}].Price`, prod.Price!);
     formData.append(`Products[${index}].IsAvailable`, prod.IsAvailable.toString());
+    if (prod.Picture) {
+      formData.append(`Products[${index}].Picture`, prod.Picture);
+    }
   })
   return formData;
 }
