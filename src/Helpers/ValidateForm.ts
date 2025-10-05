@@ -18,7 +18,8 @@ export function ValidateMenuForm(menu: Menu): boolean {
     const validPictures: boolean = menu.Products.every(v => {
         if (v.Picture !== null && v.Picture !== undefined) {
             const regex = /^[^¿?:*"<>|]+$/;
-            return regex.test(v.Picture?.name!);
+            const alphabet = /^[a-zA-Z0-9_.-]+$/;
+            return regex.test(v.Picture.name!) && alphabet.test(v.Picture.name);
         }
         return true;
     })
@@ -34,7 +35,7 @@ export function ValidateMenuForm(menu: Menu): boolean {
             isValid = false;
             break;
         } case (!validPictures): {
-            alert.Error('El nombre de la imagen no debe contener los siguientes caracteres: "¿ ? : * " < > |"');
+            alert.Error('El nombre de la imagen no debe contener los siguientes caracteres: "¿ ? : * " < > |" tampoco letras como "Ñ"');
             isValid = false;
             break;
         }

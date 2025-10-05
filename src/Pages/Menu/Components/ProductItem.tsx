@@ -17,7 +17,9 @@ export const ProductItem: FC<Props> = ({ Product, PKey }) => {
     return (
         <Flex className="product-item">
             <ImageUploader className="img-uploader"
-                preview={Product.PictureUrl ? Product.PictureUrl : undefined}
+                preview={Product.PictureUrl ?
+                    (Product.PictureUrl.includes('object') ? import.meta.env.VITE_SUPABASE_STORAGE + Product.PictureUrl : Product.PictureUrl)
+                    : undefined}
                 change={e => handlePicture(e, PKey)}
                 remove={() => RemovePicture(PKey)} />
             <Flex className="product-data" direction={'column'}>

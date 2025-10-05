@@ -64,13 +64,13 @@ export class MenuService {
     public async UpdateCatalog(menu: FormData): Promise<boolean> {
         try {
             const url = `${MenuService.baseUrl}/EditCatalog`;
-            const response = await client.Post<boolean>(url, menu);
-            alert.Dispose();
-            alert.Success('¡Catalogo actualizado!');
+            const response = await client.Post<boolean>(url, menu, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            });
             return response;
         } catch (e) {
-            const error = e as Error;
-            alert.Error(error.message);
             return false;
         }
     }

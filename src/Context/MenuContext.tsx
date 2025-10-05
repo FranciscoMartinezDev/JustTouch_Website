@@ -43,6 +43,7 @@ export const MenuProvider: FC<ContextChildren> = ({ children }) => {
             setLoadingMenu(true);
             var catalog = await service.GetCatalog(catalogKey);
             if (catalog != undefined) {
+                console.log(catalog)
                 setCatalog(catalog);
             }
             setLoadingMenu(false);
@@ -62,28 +63,29 @@ export const MenuProvider: FC<ContextChildren> = ({ children }) => {
         setDeletedProducts(callback);
     }
 
-
     const SaveChanges = async (catalogKey: string | undefined) => {
+        setLoadingMenu(true);
         var validate = ValidateMenuForm(catalog);
         if (validate) {
-            if (!catalogKey) {
+            if (catalogKey === undefined) {
                 const formData = MenuToFormData(catalog);
                 var result = await service.AddCatalog(formData);
                 if (result) {
+                    setLoadingMenu(false);
                     toast.Success('¡Se guardaron los cambios!');
                 }
-                console.log('nuevo');
             }
             else {
-                console.log('actualizado');
                 var request = new MenuRequest({ Menu: catalog, DeletedProducts: deletedProducts });
                 const formData = MenuRequestToFormData(request);
                 var result = await service.UpdateCatalog(formData);
-                if (request) {
+                if (result) {
+                    setLoadingMenu(false);
                     toast.Success('¡Catalogo actualizado!');
                 }
             }
         }
+        setLoadingMenu(false);
     }
 
     return (

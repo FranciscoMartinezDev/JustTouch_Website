@@ -31,7 +31,7 @@ export const MenuInfo: FC = () => {
                     borderWidth={2}>
                     <FaChevronLeft />Volver
                 </Button>
-                <Button variant={'solid'} onClick={() => SaveChanges(undefined) }>
+                <Button variant={'solid'} onClick={() => SaveChanges(catalogKey) }>
                     <FaRegFloppyDisk /> Guardar cambios
                 </Button>
             </HStack>}
