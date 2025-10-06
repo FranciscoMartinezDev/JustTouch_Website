@@ -30,6 +30,7 @@ export class AxiosClient {
         }, (error: AxiosError) => {
             Cookie.remove('JT_Token');
             store.Dispose();
+            location.href= '/sign-in';
             return Promise.reject(error);
         })
 
@@ -40,6 +41,7 @@ export class AxiosClient {
                     if (error.response.status === 401) {
                         Cookie.remove('JT_Token');
                         store.Dispose();
+                        location.href= '/sign-in';
                     } else {
                         toast.Dispose();
                         toast.Error('Error: ' + error.message);

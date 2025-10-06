@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { Button, Flex, Input, Textarea } from "@chakra-ui/react";
+import { Button, Checkbox, Flex, Input, Textarea } from "@chakra-ui/react";
 import { FaRegRectangleXmark } from "react-icons/fa6";
 import { Tooltip } from '@/components/ui/tooltip';
 import useMenu from "@/Hooks/MenuHook";
@@ -30,6 +30,11 @@ export const ProductItem: FC<Props> = ({ Product, PKey }) => {
                     <Input placeholder="Precio..."
                         onChange={e => handleProductPrice(e.target.value, PKey)}
                         value={Product.Price} />
+                    <Checkbox.Root defaultChecked={Product.IsAvailable}>
+                        <Checkbox.HiddenInput />
+                        <Checkbox.Control />
+                        <Checkbox.Label>Disponible</Checkbox.Label>
+                    </Checkbox.Root>
                     <Tooltip content='Quitar articulo' openDelay={0}>
                         <Button colorPalette={'red'} onClick={() => RemoveProduct(PKey)}>
                             <FaRegRectangleXmark />

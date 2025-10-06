@@ -64,10 +64,10 @@ export const CatalogItem: FC<Props> = ({ Catalog }) => {
                                         <Text>{prod.Name}</Text>
                                         <Flex className="product-actions">
                                             <Text>$ {prod.Price}</Text>
-                                            <Checkbox.Root checked={prod.IsAvailable}>
+                                            <Checkbox.Root checked={prod.IsAvailable} w={120}>
                                                 <Checkbox.HiddenInput />
                                                 <Checkbox.Control />
-                                                <Checkbox.Label>Disponible</Checkbox.Label>
+                                                <Checkbox.Label>{prod.IsAvailable ? 'Disponible' : 'No disponible'}</Checkbox.Label>
                                             </Checkbox.Root>
                                         </Flex>
                                     </List.Item>
