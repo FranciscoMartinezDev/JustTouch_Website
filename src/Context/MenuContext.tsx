@@ -76,7 +76,6 @@ export const MenuProvider: FC<ContextChildren> = ({ children }) => {
                 }
             }
             else {
-                // console.log(catalog);
                 var request = new MenuRequest({ Menu: catalog, DeletedProducts: deletedProducts });
                 const formData = MenuRequestToFormData(request);
                 var result = await service.UpdateCatalog(formData);
@@ -89,8 +88,14 @@ export const MenuProvider: FC<ContextChildren> = ({ children }) => {
         setLoadingMenu(false);
     }
 
+    const DropCatalog = async (catalogCode: string) => {
+        setLoadingMenu(true);
+        await service.DropCatalog(catalogCode);
+        setLoadingMenu(false);
+    }
+
     return (
-        <MenuContext.Provider value={{ menu, catalog, deletedProducts, loadingMenu, SaveChanges, handler, DeletedProducts, LoadMenu, Initialize }}>
+        <MenuContext.Provider value={{ menu, catalog, deletedProducts, loadingMenu, SaveChanges,DropCatalog,  handler, DeletedProducts, LoadMenu, Initialize }}>
             {children}
         </MenuContext.Provider>
     )

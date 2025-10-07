@@ -4,6 +4,7 @@ import { FaAngleUp, FaRegRectangleXmark, FaPenToSquare } from "react-icons/fa6";
 import { useState, type CSSProperties, type FC } from "react";
 import { Menu } from '@/Models/Menu';
 import '../Menu.scss';
+import { useMenuContext } from "@/Context/MenuContext";
 
 interface Props {
     Catalog: Menu;
@@ -11,6 +12,7 @@ interface Props {
 
 
 export const CatalogItem: FC<Props> = ({ Catalog }) => {
+    const { DropCatalog } = useMenuContext();
     const [collapsed, setCollapsed] = useState<boolean>(false);
 
     const collapse = () => {
@@ -22,6 +24,9 @@ export const CatalogItem: FC<Props> = ({ Catalog }) => {
     }
 
     const rotateButton: CSSProperties = {
+        backgroundColor: 'white',
+        width: 35,
+        color: 'gray',
         transform: `rotateZ(${collapsed ? '180deg' : '0'})`,
         transition: '.2s ease-in ease-out'
     }
@@ -29,7 +34,7 @@ export const CatalogItem: FC<Props> = ({ Catalog }) => {
     const Edit = (catalogKey: string) => {
         location.href = `/profile/edit-product-group/${catalogKey}`
     }
-    
+
     return (
         <Collapsible.Root>
             <Card.Root className="catalog-card">
@@ -38,7 +43,7 @@ export const CatalogItem: FC<Props> = ({ Catalog }) => {
                         <Heading as={"h1"} color={'gray'}>{Catalog.Catalog}</Heading>
                         <Flex spaceX={1} className="catalog-actions">
                             <Tooltip content='Quitar grupo'>
-                                <Button colorPalette={'red'}>
+                                <Button colorPalette={'red'} onClick={() => DropCatalog(Catalog.CatalogCode!)}>
                                     <FaRegRectangleXmark />
                                 </Button>
                             </Tooltip>
@@ -47,10 +52,8 @@ export const CatalogItem: FC<Props> = ({ Catalog }) => {
                                     <FaPenToSquare />
                                 </Button>
                             </Tooltip>
-                            <Collapsible.Trigger>
-                                <Button bg={'white'} color={'gray'} onClick={collapse} style={rotateButton}>
-                                    <FaAngleUp />
-                                </Button>
+                            <Collapsible.Trigger onClick={collapse}>
+                                <FaAngleUp style={rotateButton} />
                             </Collapsible.Trigger>
                         </Flex>
                     </Flex>

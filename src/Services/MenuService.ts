@@ -74,4 +74,14 @@ export class MenuService {
             return false;
         }
     }
+
+    public async DropCatalog(catalogCode:string): Promise<boolean>{
+        try{
+            const url = `${MenuService.baseUrl}/Catalog/Drop/${catalogCode}`;
+            const response = await client.Get<boolean>(url);
+            return response;
+        }catch(e){
+            return false;
+        }
+    }
 }
