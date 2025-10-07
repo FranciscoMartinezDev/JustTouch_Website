@@ -26,7 +26,7 @@ export default function useMenu() {
                     if (i === index) {
                         const regex = /^\d*([.,]\d*)?$/;
                         if (regex.test(value.toString())) {
-                            return { ...prd, Price: value };
+                            return { ...prd, Price: value.replace('.', ',') };
                         }
                     }
                     return prd;
@@ -39,6 +39,14 @@ export default function useMenu() {
         handler((prev) => {
             const productList = [...prev.Products];
             productList[index].Description = value;
+            return { ...prev, Products: productList }
+        })
+    }
+
+    const handleAvailable = (value: boolean, index: number) => {
+        handler((prev) => {
+            const productList = [...prev.Products];
+            productList[index].IsAvailable = value;
             return { ...prev, Products: productList }
         })
     }
@@ -101,6 +109,7 @@ export default function useMenu() {
         handleProductName,
         handleProductPrice,
         handleProductDescription,
+        handleAvailable,
         handlePicture,
         PushProduct,
         RemovePicture,

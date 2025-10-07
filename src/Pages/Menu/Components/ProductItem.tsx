@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const ProductItem: FC<Props> = ({ Product, PKey }) => {
-    const { handleProductName, handleProductPrice, handleProductDescription, handlePicture, RemovePicture, RemoveProduct } = useMenu();
+    const { handleProductName, handleProductPrice, handleProductDescription, handlePicture, handleAvailable, RemovePicture, RemoveProduct } = useMenu();
 
     return (
         <Flex className="product-item">
@@ -30,7 +30,9 @@ export const ProductItem: FC<Props> = ({ Product, PKey }) => {
                     <Input placeholder="Precio..."
                         onChange={e => handleProductPrice(e.target.value, PKey)}
                         value={Product.Price} />
-                    <Checkbox.Root defaultChecked={Product.IsAvailable}>
+                    <Checkbox.Root defaultChecked={Product.IsAvailable} onCheckedChange={({ checked }) =>
+                        handleAvailable(checked === true, PKey)
+                    }>
                         <Checkbox.HiddenInput />
                         <Checkbox.Control />
                         <Checkbox.Label>Disponible</Checkbox.Label>
