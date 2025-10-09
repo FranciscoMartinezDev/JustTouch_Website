@@ -5,8 +5,8 @@ export class Product {
   Description?: string | undefined;
   Price?: string | undefined;
   IsAvailable!: boolean;
-  PictureUrl?: string;
-  Picture?: File;
+  PictureUrl?: string | undefined;
+  Picture?: File | null;
 
   constructor(init?: Partial<Product>) {
     Object.assign(this, init);

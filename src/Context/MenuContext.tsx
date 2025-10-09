@@ -41,10 +41,12 @@ export const MenuProvider: FC<ContextChildren> = ({ children }) => {
     const Initialize = async (catalogKey: string | undefined) => {
         if (catalogKey !== undefined) {
             setLoadingMenu(true);
-            var catalog = await service.GetCatalog(catalogKey);
-            if (catalog != undefined) {
-                console.log(catalog)
-                setCatalog(catalog);
+            var catalogData = await service.GetCatalog(catalogKey);
+            if (catalogData != undefined) {
+                catalogData.Products.map(x =>{
+                    x.Price =  x.Price ? x.Price.toString().replace('.', ',') : x.Price;
+                })
+                setCatalog(catalogData);
             }
             setLoadingMenu(false);
         } else {
@@ -78,6 +80,9 @@ export const MenuProvider: FC<ContextChildren> = ({ children }) => {
             else {
                 var request = new MenuRequest({ Menu: catalog, DeletedProducts: deletedProducts });
                 const formData = MenuRequestToFormData(request);
+                for(const form of formData){
+                    console.log(form[0] + form[1]);
+                }
                 var result = await service.UpdateCatalog(formData);
                 if (result) {
                     setLoadingMenu(false);
@@ -88,14 +93,21 @@ export const MenuProvider: FC<ContextChildren> = ({ children }) => {
         setLoadingMenu(false);
     }
 
-    const DropCatalog = async (catalogCode: string) => {
+    const DropCatalog = async (catalogCode: string, index: number) => {
         setLoadingMenu(true);
-        await service.DropCatalog(catalogCode);
+        const data = await service.DropCatalog(catalogCode);
+        if (data) {
+            setMenu(prev => {
+                const catalogs = [...prev];
+                catalogs.splice(index, 1);
+                return catalogs;
+            })
+        }
         setLoadingMenu(false);
     }
 
     return (
-        <MenuContext.Provider value={{ menu, catalog, deletedProducts, loadingMenu, SaveChanges,DropCatalog,  handler, DeletedProducts, LoadMenu, Initialize }}>
+        <MenuContext.Provider value={{ menu, catalog, deletedProducts, loadingMenu, SaveChanges, DropCatalog, handler, DeletedProducts, LoadMenu, Initialize }}>
             {children}
         </MenuContext.Provider>
     )

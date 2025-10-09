@@ -26,7 +26,7 @@ export const Menu: FC = () => {
                 <Flex className="catalog-container">
                     {menu.length > 0 ?
                         menu.map((item, index) => {
-                            return <CatalogItem Catalog={item} key={index} />
+                            return <CatalogItem Index={index} Catalog={item} key={index} />
                         })
                         :
                         <Heading margin={'auto'}>No hay productos para mostrar</Heading>

@@ -51,8 +51,6 @@ export class MenuService {
                     "Content-Type": "multipart/form-data"
                 }
             });
-            alert.Dispose();
-            alert.Success('¡Catalogo añadido exitosamente!')
             return response;
         } catch (e) {
             const error = e as Error;

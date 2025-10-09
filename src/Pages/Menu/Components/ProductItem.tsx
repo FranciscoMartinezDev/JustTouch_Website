@@ -22,17 +22,19 @@ export const ProductItem: FC<Props> = ({ Product, PKey }) => {
                     : undefined}
                 change={e => handlePicture(e, PKey)}
                 remove={() => RemovePicture(PKey)} />
+            {/* ============================================================================================================================= */}
             <Flex className="product-data" direction={'column'}>
                 <Flex className="first-data">
                     <Input placeholder="Acticulo..."
                         onChange={e => handleProductName(e.target.value, PKey)}
-                        value={Product.Name} />
+                        defaultValue={Product.Name} />
+
                     <Input placeholder="Precio..."
                         onChange={e => handleProductPrice(e.target.value, PKey)}
-                        value={Product.Price} />
-                    <Checkbox.Root defaultChecked={Product.IsAvailable} onCheckedChange={({ checked }) =>
-                        handleAvailable(checked === true, PKey)
-                    }>
+                        defaultValue={Product.Price} />
+
+                    <Checkbox.Root defaultChecked={Product.IsAvailable}
+                        onCheckedChange={({ checked }) => handleAvailable(checked === true, PKey)}>
                         <Checkbox.HiddenInput />
                         <Checkbox.Control />
                         <Checkbox.Label>Disponible</Checkbox.Label>
@@ -47,8 +49,7 @@ export const ProductItem: FC<Props> = ({ Product, PKey }) => {
                     <Textarea placeholder="Descripcion..."
                         resize={'none'}
                         onChange={e => handleProductDescription(e.target.value, PKey)}
-                        value={Product.Description}
-                    />
+                        defaultValue={Product.Description} />
                 </Flex>
             </Flex>
         </Flex>

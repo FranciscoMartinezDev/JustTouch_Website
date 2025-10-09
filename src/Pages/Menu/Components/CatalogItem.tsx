@@ -8,10 +8,11 @@ import { useMenuContext } from "@/Context/MenuContext";
 
 interface Props {
     Catalog: Menu;
+    Index: number;
 }
 
 
-export const CatalogItem: FC<Props> = ({ Catalog }) => {
+export const CatalogItem: FC<Props> = ({ Catalog, Index }) => {
     const { DropCatalog } = useMenuContext();
     const [collapsed, setCollapsed] = useState<boolean>(false);
 
@@ -43,7 +44,7 @@ export const CatalogItem: FC<Props> = ({ Catalog }) => {
                         <Heading as={"h1"} color={'gray'}>{Catalog.Catalog}</Heading>
                         <Flex spaceX={1} className="catalog-actions">
                             <Tooltip content='Quitar grupo'>
-                                <Button colorPalette={'red'} onClick={() => DropCatalog(Catalog.CatalogCode!)}>
+                                <Button colorPalette={'red'} onClick={() => DropCatalog(Catalog.CatalogCode!, Index)}>
                                     <FaRegRectangleXmark />
                                 </Button>
                             </Tooltip>

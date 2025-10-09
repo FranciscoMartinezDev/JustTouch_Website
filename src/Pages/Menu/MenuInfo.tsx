@@ -42,7 +42,7 @@ export const MenuInfo: FC = () => {
                             label="Catalogo"
                             placeholder=". . ."
                             change={e => handleCatalog(e.target.value)}
-                            value={catalog.Catalog} />
+                            defaultValue={catalog.Catalog} />
                         <Button colorPalette={'teal'} onClick={PushProduct}>Cargar productos</Button>
                     </Flex>
                     <Box className="product-list">
