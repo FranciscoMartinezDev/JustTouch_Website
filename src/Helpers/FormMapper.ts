@@ -37,15 +37,14 @@ export function MenuRequestToFormData(req: MenuRequest): FormData {
       formData.append(`Menu.Products[${index}].Picture`, product.Picture);
     }
   });
-
   req.DeletedProducts.forEach((product, index) => {
-    formData.append(`DeleteProducts[${index}].ProductCode`, product.ProductCode ?? '');
-    formData.append(`DeleteProducts[${index}].Name`, product.Name!);
-    formData.append(`DeleteProducts[${index}].Description`, product.Description!);
-    formData.append(`DeleteProducts[${index}].Price`, product.Price!.replace('.', ','));
-    formData.append(`DeleteProducts[${index}].IsAvailable`, product.IsAvailable.toString());
+    formData.append(`DeletedProducts[${index}].ProductCode`, product.ProductCode ?? '');
+    formData.append(`DeletedProducts[${index}].Name`, product.Name!);
+    formData.append(`DeletedProducts[${index}].Description`, product.Description!);
+    formData.append(`DeletedProducts[${index}].Price`, product.Price!.replace('.', ','));
+    formData.append(`DeletedProducts[${index}].IsAvailable`, product.IsAvailable.toString());
     if (product.PictureUrl !== undefined && product.PictureUrl !== '') {
-      formData.append(`DeleteProducts[${index}].PictureUrl`, product.PictureUrl!);
+      formData.append(`DeletedProducts[${index}].PictureUrl`, product.PictureUrl!);
     }
   });
   // for (const pair of formData.entries()) {

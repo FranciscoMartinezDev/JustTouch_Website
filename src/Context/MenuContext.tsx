@@ -42,6 +42,7 @@ export const MenuProvider: FC<ContextChildren> = ({ children }) => {
         if (catalogKey !== undefined) {
             setLoadingMenu(true);
             var catalogData = await service.GetCatalog(catalogKey);
+           
             if (catalogData != undefined) {
                 catalogData.Products.map(x =>{
                     x.Price =  x.Price ? x.Price.toString().replace('.', ',') : x.Price;
@@ -79,6 +80,7 @@ export const MenuProvider: FC<ContextChildren> = ({ children }) => {
             }
             else {
                 var request = new MenuRequest({ Menu: catalog, DeletedProducts: deletedProducts });
+                console.log(deletedProducts)
                 const formData = MenuRequestToFormData(request);
                 for(const form of formData){
                     console.log(form[0] + form[1]);

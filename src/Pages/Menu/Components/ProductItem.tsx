@@ -33,7 +33,7 @@ export const ProductItem: FC<Props> = ({ Product, PKey }) => {
                         onChange={e => handleProductPrice(e.target.value, PKey)}
                         defaultValue={Product.Price} />
 
-                    <Checkbox.Root defaultChecked={Product.IsAvailable}
+                    <Checkbox.Root checked={Product.IsAvailable}
                         onCheckedChange={({ checked }) => handleAvailable(checked === true, PKey)}>
                         <Checkbox.HiddenInput />
                         <Checkbox.Control />
