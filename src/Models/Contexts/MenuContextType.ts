@@ -6,10 +6,12 @@ export type MenuContextType = {
     catalog: Menu,
     deletedProducts: Product[],
     loadingMenu: boolean,
+    showModal: boolean,
     handler: (callback: (prev: Menu) => Menu) => void,
     DeletedProducts: (callback: (prev: Product[]) => Product[]) => void,
     SaveChanges: (catalogKey: string | undefined) => void,
-    DropCatalog:(catalogCode:string, index:number) => void,
+    DropCatalog: (catalogCode: string, index: number) => void,
     Initialize: (catalogKey: string | undefined) => void,
     LoadMenu: () => void,
+    OpenModal: () => void,
 }

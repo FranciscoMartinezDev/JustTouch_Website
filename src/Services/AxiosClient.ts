@@ -42,7 +42,12 @@ export class AxiosClient {
                         Cookie.remove('JT_Token');
                         store.Dispose();
                         location.href= '/sign-in';
-                    } else {
+                    }else if(error.response.status === 403) {
+                        Cookie.remove('JT_Token');
+                        store.Dispose();
+                        location.href= '/sign-in';
+                    }
+                    else {
                         toast.Dispose();
                         toast.Error('Error: ' + error.message);
                     }

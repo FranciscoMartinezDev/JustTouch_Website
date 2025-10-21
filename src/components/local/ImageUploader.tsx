@@ -8,9 +8,10 @@ interface Props {
     change?: (event: React.ChangeEvent<HTMLInputElement>) => void;
     remove?: () => void;
     preview?: string | undefined;
+    placeholder?: string | undefined;
 }
 
-export const ImageUploader: FC<Props> = ({ className, change, remove, preview }) => {
+export const ImageUploader: FC<Props> = ({ className, change, remove, preview, placeholder }) => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     const clickUpdate = () => {
@@ -37,7 +38,7 @@ export const ImageUploader: FC<Props> = ({ className, change, remove, preview })
                 <Tooltip content='El tamaño de imagen debe ser de 90x90' openDelay={0}>
                     <Box className="image-placeholder" onClick={clickUpdate}>
                         <FaImage />
-                        <Text>Seleccione una imagen</Text>
+                        <Text>{placeholder || 'Seleccione una imagen'}</Text>
                         <Input ref={inputRef}
                             type={'file'}
                             accept="image/*"
