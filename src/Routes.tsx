@@ -8,6 +8,7 @@ import { ServiceRequest } from '@/Pages/ServiceRequest/ServiceRequest';
 import { MessageRequested } from '@/Pages/ServiceRequest/MessageRequested';
 import { ConfirmAccount } from '@/Pages/ServiceRequest/ConfirmAccount';
 import { Signin } from '@/Pages/Account/SignIn';
+import { PublicMenu } from './Pages/Menu/PublicMenu';
 
 
 export const routes = JustTouchBrowser([
@@ -28,11 +29,15 @@ export const routes = JustTouchBrowser([
         element: <Signin />
     },
     {
+        path: '/menu/:branchCode',
+        element: <PublicMenu />
+    },
+    {
         element: <Gatekeeper />,
         children: [
             {
                 path: '/',
-                element: <Navigate to={'/sign-in'}/>
+                element: <Navigate to={'/sign-in'} />
             },
             {
                 path: '/profile/account',

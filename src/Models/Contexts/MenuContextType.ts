@@ -7,6 +7,7 @@ export type MenuContextType = {
     deletedProducts: Product[],
     loadingMenu: boolean,
     showModal: boolean,
+    menuUrl: string,
     handler: (callback: (prev: Menu) => Menu) => void,
     DeletedProducts: (callback: (prev: Product[]) => Product[]) => void,
     SaveChanges: (catalogKey: string | undefined) => void,

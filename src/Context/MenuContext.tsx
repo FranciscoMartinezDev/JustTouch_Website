@@ -27,6 +27,7 @@ export const MenuProvider: FC<ContextChildren> = ({ children }) => {
     const [loadingMenu, setLoadingMenu] = useState<boolean>(false);
     const [deletedProducts, setDeletedProducts] = useState<Product[]>([]);
     const [showModal, setShowModal] = useState<boolean>(false);
+    const [menuUrl, setMenuUrl] = useState<string>('');
     const service = MenuService.getInstance();
     const toast = LocalToast.getInstance();
     const store = Storage.getInstance();
@@ -34,6 +35,8 @@ export const MenuProvider: FC<ContextChildren> = ({ children }) => {
     const LoadMenu = async () => {
         setLoadingMenu(true);
         var data = await service.GetMenu();
+        const branch = store.Get<string>('branch_code');
+        setMenuUrl(`${window.location.origin}/menu/${branch}`);
         setMenu(data || []);
         setLoadingMenu(false);
     }
@@ -111,7 +114,7 @@ export const MenuProvider: FC<ContextChildren> = ({ children }) => {
     const OpenModal = () => showModal ? setShowModal(false) : setShowModal(true);
 
     return (
-        <MenuContext.Provider value={{ menu, catalog, deletedProducts, loadingMenu, showModal, OpenModal, SaveChanges, DropCatalog, handler, DeletedProducts, LoadMenu, Initialize }}>
+        <MenuContext.Provider value={{ menu, catalog, deletedProducts, loadingMenu, showModal, menuUrl, OpenModal, SaveChanges, DropCatalog, handler, DeletedProducts, LoadMenu, Initialize }}>
             {children}
         </MenuContext.Provider>
     )

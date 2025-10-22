@@ -38,6 +38,26 @@
 
 }
 
+.portada {
+    height: 70px;
+    margin-bottom: 20px;
+}
+
+.logo {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+
+    svg {
+        font-size: 25px !important;
+    }
+
+    p {
+
+        font-size: 13px !important;
+    }
+}
+
 // menu info ======================================================
 .catalog {
     border-bottom: 1px solid lightgray;
@@ -88,16 +108,32 @@
 .img-uploader {
     width: 120px !important;
     height: 108px !important;
-
 }
 
-.portada {
-    height: 70px;
-    margin-bottom: 20px;
-}
+// public menu ====================================================
 
-.logo {
-    border-radius: 50%;
-    height: 135px;
-    width: 135px;
+.public-menu {
+    background-color: black !important;
+    height: 100%;
+    overflow-y: auto;
+    padding-bottom: 30px;
+    position: relative;
+
+    .front-page {
+        height: 700px;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: red;
+    }
+
+    .card-menu {
+        width: calc(100% - 200px);
+        height: 2000px;
+        margin: auto;
+        margin-top: 400px;
+        z-index: 2;
+        background-color: blueviolet;
+    }
 }
