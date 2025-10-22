@@ -113,7 +113,6 @@
 // public menu ====================================================
 
 .public-menu {
-    background-color: black !important;
     height: 100%;
     overflow-y: auto;
     padding-bottom: 30px;
@@ -125,15 +124,54 @@
         position: absolute;
         top: 0;
         left: 0;
-        background-color: red;
+
+        .business-data {
+            background-color: rgba(0, 0, 0, .7);
+            width: 100%;
+            height: 700px;
+            padding-inline: 100px;
+            padding-top: 20px;
+
+            .data {
+                border-bottom: 2px solid white;
+                height: 80px;
+                width: 100%;
+                margin: auto;
+                padding-bottom: 10px;
+                h1 {
+                    color: white;
+                }
+
+                .logo-container {
+                    position: relative;
+                    top: 75px;
+                    left: -1px;
+                    border-radius: 50%;
+                    width: 130px;
+                    height: 130px;
+                    background-color: #A05631;
+                }
+
+                .social{
+                    background-color: #A05631;
+                    border-radius: 50%;
+                    color: white;
+                    padding: 5px;
+                    height: 50px;
+                    width: 50px;
+                    display: grid;
+                    place-items: center;
+                    font-size: 35px;
+                }
+            }
+        }
     }
 
     .card-menu {
         width: calc(100% - 200px);
         height: 2000px;
         margin: auto;
-        margin-top: 400px;
+        margin-top: 300px;
         z-index: 2;
-        background-color: blueviolet;
     }
 }
