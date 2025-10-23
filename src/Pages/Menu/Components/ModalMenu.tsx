@@ -1,6 +1,6 @@
 import { ImageUploader } from "@/components/local/ImageUploader";
 import { useMenuContext } from "@/Context/MenuContext";
-import { Button, Dialog, Flex, Heading, Input, Clipboard, InputGroup, IconButton } from "@chakra-ui/react";
+import { Button, Dialog, Flex, Heading, Input, Clipboard, InputGroup, IconButton, Field } from "@chakra-ui/react";
 import { type FC } from "react";
 
 export const ModalMenu: FC = () => {
@@ -20,11 +20,20 @@ export const ModalMenu: FC = () => {
                         <Flex align={'center'} gap={5} borderBottom={'1px solid lightgray'} paddingBottom={3}>
                             <ImageUploader className="logo" placeholder="Seleccione un logo" />
                             <Flex gap={2} w={'calc(100% - 100px)'} direction={'column'}>
-                                <Input placeholder="Instagram..." />
+                                <Field.Root>
+                                    <Field.Label color={'gray'}>Horario de atención</Field.Label>
+                                    <Flex gap={2} w={'100%'}>
+                                        <Input type="time" />
+                                        <Input type="time" />
+                                    </Flex>
+                                </Field.Root>
+
                                 <Flex minW={'120px'} gap={2}>
+                                    <Input placeholder="Instagram..." />
                                     <Input placeholder="Facebook..." />
                                     <Input placeholder="Whatsapp..." />
                                 </Flex>
+
                             </Flex>
                         </Flex>
                         <Clipboard.Root w={'100%'} marginTop={3} value={menuUrl}>
@@ -48,6 +57,6 @@ export const ModalMenu: FC = () => {
                     </Dialog.Footer>
                 </Dialog.Content>
             </Dialog.Positioner>
-        </Dialog.Root>
+        </Dialog.Root >
     )
 }
