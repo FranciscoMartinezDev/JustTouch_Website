@@ -10,15 +10,51 @@ export const PublicMenu: FC = () => {
 
     return (
         <Box className="public-menu">
-            <Box className="front-page">
+            <Box className="menu-header">
+                <Image
+                    src="https://foodandpleasure.com/wp-content/uploads/2018/06/restaurantes-bonitos-cdmx-aromas-.jpg" />
+                <Box className="box-data">
+                    <Flex className="data" align={'end'}>
+                        <Box className="menu-logo">
+                            <Image src='https://dvvlhkouasxqzmaxkvll.supabase.co/storage/v1/object/public/footages/JustTouchLogo.png' />
+                        </Box>
+                        <Heading as={"h1"}>Mi Negocio</Heading>
+                        <Flex className="social-container">
+                            <Box className="social">
+                                <FaFacebook />
+                            </Box>
+                            <Box className="social">
+                                <FaInstagram />
+                            </Box>
+                            <Box className="social">
+                                <FaWhatsapp />
+                            </Box>
+                        </Flex>
+                    </Flex>
+                </Box>
+            </Box>
+
+            <Card.Root className="card-menu">
+                <Card.Body>
+                    <Flex className="filter" borderBottom={'1px solid lightgray'} paddingBottom={5}>
+                        <Input placeholder="Buscar..." />
+                    </Flex>
+
+                </Card.Body>
+            </Card.Root>
+        </Box>
+    )
+}
+
+/*
+ <Box className="front-page">
                 <Image className="front-photo" src="https://foodandpleasure.com/wp-content/uploads/2018/06/restaurantes-bonitos-cdmx-aromas-.jpg"/>
                 <Box className="data-header">
                     <Flex className="data" gap={5} align={'end'}>
                         <Box className="menu-logo">
-                            <Image src='https://dvvlhkouasxqzmaxkvll.supabase.co/storage/v1/object/public/footages/JustTouchLogo.png' />
                         </Box>
                         <Heading as={"h1"}>Negocio</Heading>
-                        <Flex marginLeft={'auto'} gap={5} align={'center'} h={'auto'}>
+                        <Flex className="social-container" marginLeft={'auto'} align={'center'} h={'auto'}>
                             <Box className="social">
                                 <FaFacebook />
                             </Box>
@@ -41,6 +77,4 @@ export const PublicMenu: FC = () => {
                 </Card.Body>
             </Card.Root>
 
-        </Box>
-    )
-}
+            */ 

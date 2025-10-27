@@ -13,7 +13,7 @@ export const ModalMenu: FC = () => {
                 <Dialog.Content colorPalette={'cyan'} paddingInline={5}>
                     <Dialog.CloseTrigger />
                     <Dialog.Header borderBottom={'1px solid lightgray'} paddingInline={0}>
-                        <Heading as={"h1"} fontSize={30} color={'gray'}>Menu</Heading>
+                        <Heading as={"h1"} fontSize={30} color={'gray'}>Configuración</Heading>
                     </Dialog.Header>
                     <Dialog.Body paddingInline={0}>
                         <ImageUploader className="portada" placeholder="Seleccione una portada" />
