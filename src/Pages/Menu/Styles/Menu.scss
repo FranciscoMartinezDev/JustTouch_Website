@@ -200,6 +200,7 @@
 
         .category {
             overflow-x: auto;
+
             a {
                 background-color: #A05631;
                 width: 4dvw;
@@ -246,5 +247,64 @@
             }
         }
 
+    }
+
+    .public-footer-order {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        z-index: 4;
+        background-color: #E5904D;
+        padding-inline: 2vw;
+        height: 5vw;
+
+        button {
+            margin-left: auto;
+            background-color: #A05631;
+            padding-inline: 50px;
+        }
+
+        .article {
+            position: relative;
+            height: 3.5vw;
+            padding-right: 10px;
+            gap: 20px;
+            color: white;
+            font-weight: 500;
+
+            img {
+                border-radius: 5px;
+                object-fit: cover;
+                width: 3.5vw;
+                height: 3.5vw;
+            }
+        }
+    }
+
+    .public-menu-footer {
+        position: fixed;
+        bottom: 0;
+        height: 80px;
+        width: 100%;
+        padding-inline: 2.5vw;
+        background-color: #E5904D;
+        z-index: 4;
+
+        p {
+            color: white;
+            font-size: clamp(15px, 1.8vw, 1.8vw);
+        }
+
+        button {
+            background-color: #A05631;
+            margin-left: auto;
+            height: 35px;
+            width: clamp(150px, 10vw, 10vw);
+        }
+
+        button+button {
+            margin: 0;
+            width: clamp(120px, 8vw, 8vw);
+        }
     }
 }

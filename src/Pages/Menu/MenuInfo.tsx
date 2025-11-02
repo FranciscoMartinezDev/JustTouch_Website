@@ -6,7 +6,7 @@ import { ProductItem } from "@/Pages/Menu/Components/ProductItem";
 import { FormInput } from "@/components/local/FormInput";
 import useMenu from "@/Hooks/MenuHook";
 import { useMenuContext } from "@/Context/MenuContext";
-import './Menu.scss';
+import './Styles/Menu.scss';
 import { useParams } from "react-router";
 
 export const MenuInfo: FC = () => {

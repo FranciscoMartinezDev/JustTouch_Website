@@ -6,6 +6,8 @@ import { PublicCatalog } from "@/Pages/Menu/Components/Public/PublicCatalog";
 import { Tooltip } from '@/components/ui/tooltip';
 import { FaBowlFood } from "react-icons/fa6";
 import './Menu.scss';
+import { PublicMenuFooter } from "./Components/Public/PublicMenuFooter";
+import { PublicFooterOrder } from "./Components/Public/PublicFooterOrder";
 
 export const PublicMenu: FC = () => {
     const { } = useMenuContext();
@@ -58,55 +60,55 @@ export const PublicMenu: FC = () => {
                                 </Link>
                                 <Text>Catalogo 1</Text>
                             </Flex>
-                               <Flex direction={'column'} align={'center'}>
+                            <Flex direction={'column'} align={'center'}>
                                 <Link>
                                     <FaBowlFood />
                                 </Link>
                                 <Text>Catalogo 1</Text>
                             </Flex>
-                                <Flex direction={'column'} align={'center'}>
+                            <Flex direction={'column'} align={'center'}>
                                 <Link>
                                     <FaBowlFood />
                                 </Link>
                                 <Text>Catalogo 1</Text>
                             </Flex>
-                                <Flex direction={'column'} align={'center'}>
+                            <Flex direction={'column'} align={'center'}>
                                 <Link>
                                     <FaBowlFood />
                                 </Link>
                                 <Text>Catalogo 1</Text>
                             </Flex>
-                                <Flex direction={'column'} align={'center'}>
+                            <Flex direction={'column'} align={'center'}>
                                 <Link>
                                     <FaBowlFood />
                                 </Link>
                                 <Text>Catalogo 1</Text>
                             </Flex>
-                                <Flex direction={'column'} align={'center'}>
+                            <Flex direction={'column'} align={'center'}>
                                 <Link>
                                     <FaBowlFood />
                                 </Link>
                                 <Text>Catalogo 1</Text>
                             </Flex>
-                                <Flex direction={'column'} align={'center'}>
+                            <Flex direction={'column'} align={'center'}>
                                 <Link>
                                     <FaBowlFood />
                                 </Link>
                                 <Text>Catalogo 1</Text>
                             </Flex>
-                                <Flex direction={'column'} align={'center'}>
+                            <Flex direction={'column'} align={'center'}>
                                 <Link>
                                     <FaBowlFood />
                                 </Link>
                                 <Text>Catalogo 1</Text>
                             </Flex>
-                                <Flex direction={'column'} align={'center'}>
+                            <Flex direction={'column'} align={'center'}>
                                 <Link>
                                     <FaBowlFood />
                                 </Link>
                                 <Text>Catalogo 1</Text>
                             </Flex>
-                                <Flex direction={'column'} align={'center'}>
+                            <Flex direction={'column'} align={'center'}>
                                 <Link>
                                     <FaBowlFood />
                                 </Link>
@@ -117,6 +119,8 @@ export const PublicMenu: FC = () => {
                     <PublicCatalog />
                 </Card.Body>
             </Card.Root>
+            <PublicMenuFooter />
+            {/* <PublicFooterOrder /> */}
         </Box>
     )
 }

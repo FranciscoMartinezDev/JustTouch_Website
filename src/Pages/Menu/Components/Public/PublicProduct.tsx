@@ -16,8 +16,8 @@ export const PublicProduct: FC<Props> = ({ Product }) => {
                     <Flex className="public-product-data" paddingInline={2} direction={'column'}>
                         <Text>Producto 1</Text>
                         <Text>Descripcion 1</Text>
-                        <Button bg={'#A05631'} _hover={{backgroundColor: '#934d2aff' }}>
-                            Añadir al carrito
+                        <Button bg={'#A05631'} _hover={{ backgroundColor: '#934d2aff' }}>
+                            Pedir
                         </Button>
                     </Flex>
                 </Flex>
