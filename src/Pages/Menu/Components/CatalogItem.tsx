@@ -3,7 +3,7 @@ import { Tooltip } from "@/components/ui/tooltip";
 import { FaAngleUp, FaRegRectangleXmark, FaPenToSquare } from "react-icons/fa6";
 import { useState, type CSSProperties, type FC } from "react";
 import { Menu } from '@/Models/Menu';
-import '../Menu.scss';
+import '../../Menu/Styles/Menu.scss';
 import { useMenuContext } from "@/Context/MenuContext";
 
 interface Props {

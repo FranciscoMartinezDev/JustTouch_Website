@@ -5,9 +5,9 @@ import { FaFacebook, FaInstagram, FaWhatsapp } from "react-icons/fa6";
 import { PublicCatalog } from "@/Pages/Menu/Components/Public/PublicCatalog";
 import { Tooltip } from '@/components/ui/tooltip';
 import { FaBowlFood } from "react-icons/fa6";
-import './Menu.scss';
 import { PublicMenuFooter } from "./Components/Public/PublicMenuFooter";
 import { PublicFooterOrder } from "./Components/Public/PublicFooterOrder";
+import '@/Pages/Menu/Styles/Menu.scss';
 
 export const PublicMenu: FC = () => {
     const { } = useMenuContext();

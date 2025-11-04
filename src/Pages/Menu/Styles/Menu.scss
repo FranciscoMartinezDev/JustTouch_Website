@@ -1,3 +1,5 @@
+@use '../../Layout.Resize.scss' as *;
+
 // menu ===========================================================
 .catalog-container {
     padding: 20px;
@@ -115,7 +117,7 @@
 
 .public-menu {
     width: 100dvw;
-
+    
     .menu-header {
         height: clamp(30dvh, 40dvw, 50dvh);
         position: relative;
@@ -193,7 +195,7 @@
     .card-menu {
         top: -20dvh;
         width: 95vw;
-        height: 1000dvh;
+        height: auto !important;
         box-shadow: 0 0 2px 0 gray;
         margin: auto;
         z-index: 3;
@@ -224,7 +226,7 @@
                 padding-block: 20px;
                 display: grid;
                 gap: 20px;
-                grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 
                 .public-product {
                     color: gray;
@@ -305,6 +307,61 @@
         button+button {
             margin: 0;
             width: clamp(120px, 8vw, 8vw);
+        }
+    }
+}
+
+
+@include respond-to(xs, max) {
+    .public-menu {
+        .card-menu {
+            top: -30dvw !important;
+        }
+    }
+}
+
+@include respond-to(md, max) {
+    .public-menu {
+        .box-data {
+            .data {
+                h1 {
+                    height: 40px;
+                    font-size: 3dvw !important;
+                    top: 50px !important;
+                }
+
+                .social-container {
+                    gap: 20px !important;
+
+                    .social {
+                        font-size: 25px !important;
+                        width: 5dvw !important;
+                        height: 5dvw !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include respond-to(lg, max) {
+    .card-menu {
+        top: -20dvw !important;
+        width: 100% !important;
+        height: 1000dvh;
+        box-shadow: 0 0 2px 0 gray;
+        margin: auto;
+        z-index: 3;
+        gap: 10px !important;
+
+        .category {
+            overflow-x: auto;
+            font-size: 1.2dvw;
+
+            a {
+                width: 5dvw !important;
+                height: 5dvw !important;
+            }
         }
     }
 }
