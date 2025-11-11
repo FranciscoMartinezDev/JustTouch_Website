@@ -1,0 +1,294 @@
+@use '../../Layout.Resize.scss' as *;
+
+@include respond-to(xs, max) {
+    .menu-header {
+        height: 20vh;
+
+        .header-data {
+            .data {
+
+                .menu-logo {
+                    width: 10vw;
+                    height: 10vw;
+                }
+
+
+
+                p {
+                    font-size: 1rem;
+                    max-width: 25vw;
+                }
+
+                .social-container {
+                    gap: 20px;
+
+                    .social {
+                        padding: 5px;
+                        font-size: 1.5rem;
+                    }
+                }
+            }
+        }
+    }
+
+    .card-menu {
+        border-radius: 0;
+
+        .category {
+            gap: 10vw;
+
+            .category-item {
+                a {
+                    padding: 10px;
+                    font-size: 1.5rem;
+                }
+
+                a+p {
+                    font-size: .7rem;
+                }
+            }
+        }
+
+        .public-catalog {
+            border-bottom: 1px solid lightgray;
+            padding-bottom: 20px;
+        }
+
+        .public-product {
+            font-size: .8rem;
+            gap: 5px;
+
+            button {
+                height: 20px;
+            }
+
+            img {
+                width: 10vw;
+                margin-right: 10px;
+            }
+        }
+
+    }
+}
+
+@include respond-to(xs, min) {
+    .menu-header {
+        height: 20vh;
+
+        .header-data {
+            .data {
+                gap: 10px;
+
+                .menu-logo {
+                    width: 10vw;
+                    height: 10vw;
+                }
+
+                padding-block: 5px;
+
+                p {
+                    font-size: 1rem;
+                    max-width: 25vw;
+                }
+
+                .social-container {
+                    gap: 20px;
+
+                    .social {
+                        padding: 5px;
+                        font-size: 1.5rem;
+                    }
+                }
+            }
+        }
+    }
+
+    .card-menu {
+        border-radius: 0;
+
+        .category {
+            gap: 5vw;
+
+            .category-item {
+                a {
+                    padding: 10px;
+                    font-size: 1.5rem;
+                }
+
+                a+p {
+                    font-size: .7rem;
+                }
+            }
+        }
+
+        .public-catalog {
+            border-bottom: 1px solid lightgray;
+            padding-bottom: 20px;
+        }
+
+        .public-product {
+            font-size: .8rem;
+            gap: 5px;
+
+            button {
+                height: 25px;
+            }
+
+            img {
+                width: 15vw;
+                margin-right: 10px;
+            }
+        }
+
+    }
+}
+
+@include respond-to(sm, min) {
+
+    .data {
+        gap: 20px !important;
+
+        .menu-logo {
+            width: 7vw !important;
+            height: 7vw !important;
+        }
+    }
+
+
+    .public-product {
+
+        font-size: .8rem;
+        gap: 5px;
+
+        button {
+            height: 25px;
+        }
+
+        img {
+            width: 10vw !important;
+            margin-right: 10px;
+        }
+    }
+}
+
+@include respond-to(md, min) {
+    .menu-header {
+        height: 30vh;
+
+        .data {
+            gap: 20px !important;
+            align-items: end;
+
+            p {
+                font-size: 1.5rem !important;
+            }
+
+            .menu-logo {
+                width: 7vw !important;
+                height: 7vw !important;
+            }
+        }
+    }
+
+    .social-container {
+        .social {
+            padding: 7px !important;
+            font-size: 2rem !important;
+        }
+    }
+
+    .public-product {
+        font-size: .8rem;
+        gap: 5px;
+
+        button {
+            height: 25px;
+        }
+
+        img {
+            width: 7vw !important;
+            margin-right: 10px;
+        }
+    }
+
+}
+
+@include respond-to(lg, min) {
+    .menu-header {
+        height: 50vh;
+    }
+
+    .card-menu {
+        top: -10vh;
+        width: 97vw;
+        border-radius: 10px;
+        margin: auto;
+    }
+
+    .social-container {
+        .social {
+            padding: 7px !important;
+            font-size: 2.2rem !important;
+        }
+    }
+
+    .public-product {
+        font-size: .8rem;
+        gap: 5px;
+
+        button {
+            height: 25px;
+            padding-inline: 40px;
+        }
+
+        img {
+            width: 8vw !important;
+            margin-right: 10px;
+        }
+    }
+}
+
+@include respond-to(xl, min) {
+    .menu-header {
+
+        .data {
+            .menu-logo {
+                width: 5vw !important;
+                height: 5vw !important;
+            }
+        }
+    }
+
+    .card-menu {
+
+        .category {
+            gap: 40px !important;
+
+            .category-item {
+                a {
+                    padding: 10px;
+                    font-size: 1.5rem !important;
+                }
+
+                a+p {
+                    font-size: .8rem;
+                }
+            }
+        }
+
+    }
+
+    .public-product {
+        font-size: .8rem;
+        gap: 5px;
+
+        button {
+            height: 25px;
+        }
+
+        img {
+            width: 5vw !important;
+            margin-right: 10px;
+        }
+    }
+}

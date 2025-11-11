@@ -9,17 +9,21 @@ interface Props {
 export const PublicProduct: FC<Props> = ({ Product }) => {
 
     return (
-        <Card.Root>
-            <Card.Body padding={2}>
-                <Flex className="public-product">
-                    <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsWr_Gf6aQgf1YDlocWP5beeHswUvlqTLgLQ&s"/>
-                    <Flex className="public-product-data" paddingInline={2} direction={'column'}>
-                        <Text>Producto 1</Text>
+        <Card.Root border={'1px solid lightgray'}>
+            <Card.Body padding={2} className="public-product">
+                <Flex className="product-data">
+                    <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsWr_Gf6aQgf1YDlocWP5beeHswUvlqTLgLQ&s" />
+                    <Box>
+                        <Text fontWeight={'bold'}>Producto 1</Text>
                         <Text>Descripcion 1</Text>
-                        <Button bg={'#A05631'} _hover={{ backgroundColor: '#934d2aff' }}>
-                            Pedir
-                        </Button>
-                    </Flex>
+                    </Box>
+                </Flex>
+
+                <Flex marginTop={3} align={'end'} justifyContent={'space-between'}>
+                    <Text color={'#A05631'} fontWeight={'bold'}>$ 500.50</Text>
+                    <Button bg={'#A05631'} _hover={{ backgroundColor: '#934d2aff' }}>
+                        Pedir
+                    </Button>
                 </Flex>
             </Card.Body>
         </Card.Root>

@@ -8,21 +8,34 @@ import { FaBowlFood } from "react-icons/fa6";
 import { PublicMenuFooter } from "./Components/Public/PublicMenuFooter";
 import { PublicFooterOrder } from "./Components/Public/PublicFooterOrder";
 import '@/Pages/Menu/Styles/Menu.scss';
+import '@/Pages/Menu/Styles/Menu.Resize.scss';
+
+const CategoryItem: FC = () => {
+    return (
+        <Box className="category-item">
+            <Link>
+                <FaBowlFood />
+            </Link>
+            <Text>Catalogo 1</Text>
+        </Box>
+    )
+}
 
 export const PublicMenu: FC = () => {
     const { } = useMenuContext();
 
     return (
         <Box className="public-menu">
-            <Box className="menu-header">
-                <Image
-                    src="https://foodandpleasure.com/wp-content/uploads/2018/06/restaurantes-bonitos-cdmx-aromas-.jpg" />
-                <Box className="box-data">
-                    <Flex className="data" align={'end'}>
-                        <Box className="menu-logo">
-                            <Image src='https://dvvlhkouasxqzmaxkvll.supabase.co/storage/v1/object/public/footages/JustTouchLogo.png' />
-                        </Box>
-                        <Heading as={"h1"}>Mi Negocio</Heading>
+            <Box className="menu-header"
+                bgImage={'url("https://foodandpleasure.com/wp-content/uploads/2018/06/restaurantes-bonitos-cdmx-aromas-.jpg")'}>
+
+                <Box className="header-data">
+                    <Flex className="data" align={'center'}>
+                        <Box className="menu-logo"
+                            bgImage={'url("https://img.freepik.com/vector-premium/logotipo-restaurante-bistec-tenedor-cuchillo_1240970-33805.jpg?semt=ais_hybrid&w=740&q=80")'} />
+                        {/* <Flex className="menu-title"> 
+                        </Flex> */}
+                        <Text>Mi Negocio</Text>
                         <Flex className="social-container">
                             <Tooltip content="Facebook">
                                 <Box className="social">
@@ -53,73 +66,18 @@ export const PublicMenu: FC = () => {
                         borderBottom={'1px solid lightgray'}
                         paddingBottom={5}>
                         <Input placeholder="Buscar..." />
-                        <Flex className="category" gap={10}>
-                            <Flex direction={'column'} align={'center'}>
-                                <Link>
-                                    <FaBowlFood />
-                                </Link>
-                                <Text>Catalogo 1</Text>
-                            </Flex>
-                            <Flex direction={'column'} align={'center'}>
-                                <Link>
-                                    <FaBowlFood />
-                                </Link>
-                                <Text>Catalogo 1</Text>
-                            </Flex>
-                            <Flex direction={'column'} align={'center'}>
-                                <Link>
-                                    <FaBowlFood />
-                                </Link>
-                                <Text>Catalogo 1</Text>
-                            </Flex>
-                            <Flex direction={'column'} align={'center'}>
-                                <Link>
-                                    <FaBowlFood />
-                                </Link>
-                                <Text>Catalogo 1</Text>
-                            </Flex>
-                            <Flex direction={'column'} align={'center'}>
-                                <Link>
-                                    <FaBowlFood />
-                                </Link>
-                                <Text>Catalogo 1</Text>
-                            </Flex>
-                            <Flex direction={'column'} align={'center'}>
-                                <Link>
-                                    <FaBowlFood />
-                                </Link>
-                                <Text>Catalogo 1</Text>
-                            </Flex>
-                            <Flex direction={'column'} align={'center'}>
-                                <Link>
-                                    <FaBowlFood />
-                                </Link>
-                                <Text>Catalogo 1</Text>
-                            </Flex>
-                            <Flex direction={'column'} align={'center'}>
-                                <Link>
-                                    <FaBowlFood />
-                                </Link>
-                                <Text>Catalogo 1</Text>
-                            </Flex>
-                            <Flex direction={'column'} align={'center'}>
-                                <Link>
-                                    <FaBowlFood />
-                                </Link>
-                                <Text>Catalogo 1</Text>
-                            </Flex>
-                            <Flex direction={'column'} align={'center'}>
-                                <Link>
-                                    <FaBowlFood />
-                                </Link>
-                                <Text>Catalogo 1</Text>
-                            </Flex>
+                        <Flex className="category">
+                            <CategoryItem />
+                            <CategoryItem />
+                            <CategoryItem />
+                            <CategoryItem />
+                            <CategoryItem />
                         </Flex>
                     </Flex>
                     <PublicCatalog />
                 </Card.Body>
             </Card.Root>
-            <PublicMenuFooter />
+            {/* <PublicMenuFooter /> */}
             {/* <PublicFooterOrder /> */}
         </Box>
     )
