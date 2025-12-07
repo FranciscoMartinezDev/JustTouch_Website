@@ -2,7 +2,7 @@ import type { FC } from "react";
 import { Button, Checkbox, Flex, Input, Textarea } from "@chakra-ui/react";
 import { FaRegRectangleXmark } from "react-icons/fa6";
 import { Tooltip } from '@/components/ui/tooltip';
-import useMenu from "@/Hooks/MenuHook";
+import { useMenu } from "@/Hooks/MenuHook";
 import type { Product } from "@/Models/Product";
 import { ImageUploader } from "@/components/local/ImageUploader";
 

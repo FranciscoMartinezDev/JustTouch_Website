@@ -55,7 +55,8 @@
 
     .card-menu {
         z-index: 4;
-        border: 1px solid lightgray;
+        border: none;
+        box-shadow: none;
 
         .filter {
             .category {
@@ -117,6 +118,72 @@
                     }
                 }
             }
+        }
+    }
+
+    .public-menu-footer {
+        background-color: #A05631;
+        z-index: 5;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        padding: 10px 20px;
+
+        button {
+            margin-left: auto;
+        }
+
+        .order-carrousel {
+            overflow-x: scroll;
+        }
+
+        .order-carrousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .order {
+            background-color: #82492c;
+            height: 60px;
+            align-items: center;
+            padding: 5px 10px;
+            gap: 30px;
+            border-radius: 5px;
+            color: white;
+        }
+    }
+}
+
+.modal-order {
+    color: gray;
+    .content-footer{
+        p{
+            font-size: 1rem;
+            font-weight: bold;
+        }
+    }
+    .order-list {
+        .order-item {
+            padding: 5px 0;
+            gap: 10px;
+
+            button+button {
+                height: 25px;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+
+            img {
+                height: 3vw;
+                width: 3vw;
+            }
+        }
+    }
+
+    .modal-footer{
+        button{
+            height: 30px;
         }
     }
 }

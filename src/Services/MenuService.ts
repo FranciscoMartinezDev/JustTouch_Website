@@ -2,6 +2,7 @@ import { LocalToast } from "@/components/local/Toast";
 import type { Menu } from "@/Models/Menu";
 import { Storage } from "@/Store/Storage";
 import { AxiosClient } from "@/Services/AxiosClient";
+import type { PublicMenu } from "@/Models/PublicMenu";
 const alert = LocalToast.getInstance();
 const store = Storage.getInstance();
 const client = AxiosClient.getInstance();
@@ -15,6 +16,18 @@ export class MenuService {
             MenuService.instance = new MenuService();
         }
         return MenuService.instance;
+    }
+
+    public async GetPublicMenu(branchId: string): Promise<PublicMenu | null> {
+        try {
+            const url = `${MenuService.baseUrl}/PublicMenu/${branchId}`
+            const response = await client.Get<PublicMenu>(url);
+            return response as PublicMenu;
+        } catch (e) {
+            const error = e as Error;
+            alert.Error(error.message);
+            return null;
+        }
     }
 
     public async GetMenu(): Promise<Menu[] | undefined> {
@@ -73,12 +86,12 @@ export class MenuService {
         }
     }
 
-    public async DropCatalog(catalogCode:string): Promise<boolean>{
-        try{
+    public async DropCatalog(catalogCode: string): Promise<boolean> {
+        try {
             const url = `${MenuService.baseUrl}/Catalog/Drop/${catalogCode}`;
             const response = await client.Get<boolean>(url);
             return response;
-        }catch(e){
+        } catch (e) {
             return false;
         }
     }

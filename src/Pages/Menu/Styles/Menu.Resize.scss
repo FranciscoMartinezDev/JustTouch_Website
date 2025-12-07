@@ -211,6 +211,8 @@
         }
     }
 
+   
+
 }
 
 @include respond-to(lg, min) {
@@ -246,6 +248,7 @@
             margin-right: 10px;
         }
     }
+    
 }
 
 @include respond-to(xl, min) {

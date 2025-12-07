@@ -9,6 +9,8 @@ import { Product } from '@/Models/Product';
 import { LocalToast } from '@/components/local/Toast';
 import { MenuRequest } from '@/Models/Request/MenuRequest';
 import { Storage } from '@/Store/Storage';
+import { Order } from '@/Models/Order';
+import type { PublicMenu } from '@/Models/PublicMenu';
 
 const MenuContext = createContext<MenuContextType | undefined>(undefined);
 
@@ -24,6 +26,8 @@ export const MenuProvider: FC<ContextChildren> = ({ children }) => {
             Products: [new Product({ IsAvailable: true })]
         }));
     const [menu, setMenu] = useState<Menu[]>([]);
+    const [publicMenu, setPublicMenu] = useState<PublicMenu | null>(null);
+
     const [loadingMenu, setLoadingMenu] = useState<boolean>(false);
     const [deletedProducts, setDeletedProducts] = useState<Product[]>([]);
     const [showModal, setShowModal] = useState<boolean>(false);
@@ -31,6 +35,13 @@ export const MenuProvider: FC<ContextChildren> = ({ children }) => {
     const service = MenuService.getInstance();
     const toast = LocalToast.getInstance();
     const store = Storage.getInstance();
+
+    const [orders, setOrders] = useState<Order[]>([]);
+
+    const LoadPublicMenu = async (branchId: string) => {
+        var data = await service.GetPublicMenu(branchId);
+        setPublicMenu(data);
+    }
 
     const LoadMenu = async () => {
         setLoadingMenu(true);
@@ -59,6 +70,10 @@ export const MenuProvider: FC<ContextChildren> = ({ children }) => {
                 return { ...prev, BranchCode: branch };
             })
         }
+    }
+
+    const handlerOrders = (callback: (prev: Order[]) => Order[]) => {
+        setOrders(callback);
     }
 
     const handler = (callback: (prev: Menu) => Menu) => {
@@ -114,7 +129,7 @@ export const MenuProvider: FC<ContextChildren> = ({ children }) => {
     const OpenModal = () => showModal ? setShowModal(false) : setShowModal(true);
 
     return (
-        <MenuContext.Provider value={{ menu, catalog, deletedProducts, loadingMenu, showModal, menuUrl, OpenModal, SaveChanges, DropCatalog, handler, DeletedProducts, LoadMenu, Initialize }}>
+        <MenuContext.Provider value={{ publicMenu, menu, catalog, deletedProducts, orders, loadingMenu, showModal, menuUrl, OpenModal, SaveChanges, DropCatalog, handlerOrders, handler, DeletedProducts, LoadMenu, LoadPublicMenu, Initialize }}>
             {children}
         </MenuContext.Provider>
     )

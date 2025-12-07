@@ -1,8 +1,10 @@
 import { useMenuContext } from "@/Context/MenuContext";
+import { Order } from "@/Models/Order";
+import { OrderItem } from "@/Models/OrderItem";
 import { Product } from "@/Models/Product";
 import type { ChangeEvent } from "react";
 
-export default function useMenu() {
+export function useMenu() {
     const { handler, DeletedProducts } = useMenuContext();
 
     const handleCatalog = (value: string) => {
@@ -114,5 +116,51 @@ export default function useMenu() {
         PushProduct,
         RemovePicture,
         RemoveProduct
+    }
+}
+
+export function usePublicMenu() {
+    const { handlerOrders } = useMenuContext();
+
+    const NewOrder = () => {
+        handlerOrders(prev => {
+            const listOrders = [...prev];
+            var newOrder = new Order();
+            
+            if (listOrders[listOrders.length].Id > 0) {
+                newOrder.Id = newOrder.Id + 1;
+                listOrders.push(newOrder);
+                return listOrders;
+            }
+
+            return [...prev, new Order()];
+        })
+    }
+
+    const TakeProduct = (prod: Product, quantity: number, index: number) => {
+        handlerOrders(prev => {
+            const listOrders = [...prev];
+            var newOrderItem = new OrderItem({
+                Quantity: quantity,
+                ProductCode: prod.ProductCode,
+                ProductName: prod.Name
+            });
+            listOrders[index].Items.push(newOrderItem);
+            return listOrders;
+        })
+    }
+
+    const handleDescription = (description: string, index: number) => {
+        handlerOrders(prev => {
+            const listOrders = [...prev];
+            listOrders[index].Description = description;
+            return listOrders;
+        })
+    }
+
+    return {
+        NewOrder,
+        TakeProduct,
+        handleDescription
     }
 }

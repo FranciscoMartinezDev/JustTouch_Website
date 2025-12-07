@@ -4,7 +4,7 @@ import { Box, Button, Flex, HStack } from "@chakra-ui/react";
 import { FaChevronLeft, FaRegFloppyDisk } from "react-icons/fa6";
 import { ProductItem } from "@/Pages/Menu/Components/ProductItem";
 import { FormInput } from "@/components/local/FormInput";
-import useMenu from "@/Hooks/MenuHook";
+import { useMenu } from "@/Hooks/MenuHook";
 import { useMenuContext } from "@/Context/MenuContext";
 import './Styles/Menu.scss';
 import { useParams } from "react-router";
@@ -31,7 +31,7 @@ export const MenuInfo: FC = () => {
                     borderWidth={2}>
                     <FaChevronLeft />Volver
                 </Button>
-                <Button variant={'solid'} onClick={() => SaveChanges(catalogKey) }>
+                <Button variant={'solid'} onClick={() => SaveChanges(catalogKey)}>
                     <FaRegFloppyDisk /> Guardar cambios
                 </Button>
             </HStack>}

@@ -5,6 +5,8 @@ import Cookie from 'js-cookie';
 const store = Storage.getInstance();
 const toast = LocalToast.getInstance();
 
+const allowedUrl: string[] = ["/PublicMenu"]
+
 export class AxiosClient {
     private instance: AxiosInstance;
     private baseUrl: string = import.meta.env.VITE_SERVER_SECURE_BASE_URL;
@@ -20,6 +22,10 @@ export class AxiosClient {
 
         // interceptor de request
         this.instance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+
+            if (allowedUrl.some(x => config.url?.includes(x))) {
+                return config;
+            }
             const cookie = Cookie.get('JT_Token');
             if (cookie) {
                 const token = cookie?.replace(/^"|"$/g, "") ?? "";
@@ -30,22 +36,27 @@ export class AxiosClient {
         }, (error: AxiosError) => {
             Cookie.remove('JT_Token');
             store.Dispose();
-            location.href= '/sign-in';
+            location.href = '/sign-in';
             return Promise.reject(error);
         })
 
         // interceptor de response
         this.instance.interceptors.response.use((response: AxiosResponse) => response,
             (error: AxiosError) => {
+                const url = error.config?.url;
+                if (allowedUrl.some(x => url?.includes(x))) {
+                    return Promise.reject(error);
+                }
+
                 if (error.response) {
                     if (error.response.status === 401) {
                         Cookie.remove('JT_Token');
                         store.Dispose();
-                        location.href= '/sign-in';
-                    }else if(error.response.status === 403) {
+                        location.href = '/sign-in';
+                    } else if (error.response.status === 403) {
                         Cookie.remove('JT_Token');
                         store.Dispose();
-                        location.href= '/sign-in';
+                        location.href = '/sign-in';
                     }
                     else {
                         toast.Dispose();
