@@ -5,7 +5,7 @@ import { FaXmark } from "react-icons/fa6";
 export const OrderModal: FC = () => {
 
     return (
-        <Dialog.Root open={true}>
+        <Dialog.Root open={false}>
             <Dialog.Backdrop />
             <Dialog.Positioner>
                 <Dialog.Content className="modal-order" colorPalette={'cyan'} paddingInline={5}>

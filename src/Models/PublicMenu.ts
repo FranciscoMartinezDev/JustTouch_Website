@@ -1,4 +1,4 @@
-import type { Product } from "./Product";
+import type { Menu } from "./Menu";
 
 export class PublicMenu {
     Business: string = String();
@@ -7,7 +7,7 @@ export class PublicMenu {
     WhatsappUrl: string = String();
     Open?: string | null;
     Close?: string | null;
-    Menu: Product[] = [];
+    Menu: Menu[] = [];
 
     constructor(init: Partial<PublicMenu>) {
         Object.assign(this, init);

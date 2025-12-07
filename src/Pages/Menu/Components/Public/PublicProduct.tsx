@@ -9,13 +9,13 @@ interface Props {
 export const PublicProduct: FC<Props> = ({ Product }) => {
 
     return (
-        <Card.Root border={'1px solid lightgray'}>
-            <Card.Body padding={2} className="public-product">
+        <Card.Root border={'1px solid lightgray'} className="public-product">
+            <Card.Body padding={2}>
                 <Flex className="product-data">
                     <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsWr_Gf6aQgf1YDlocWP5beeHswUvlqTLgLQ&s" />
                     <Box>
-                        <Text fontWeight={'bold'}>Producto 1</Text>
-                        <Text>Descripcion 1</Text>
+                        <Text fontWeight={'bold'}>{Product?.Name}</Text>
+                        <Text>{Product?.Description}</Text>
                     </Box>
                 </Flex>
 
